@@ -65,6 +65,7 @@ def work(bdStr, saveFilePath):
         }
         data_skill_trees.append(data_skill)
     data["savedSkillTrees"] = data_skill_trees
+    data["abilityBar"] = bd["hud"]
     # 设置神像
     idol_idx = 0
     for idol in bd["idols"]:

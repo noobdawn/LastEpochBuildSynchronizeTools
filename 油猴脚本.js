@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         New Userscript
+// @name         最后纪元配装器数据导出
 // @namespace    http://tampermonkey.net/
 // @version      2024-03-03
 // @description  try to take over the world!
@@ -97,6 +97,7 @@
 
         output["chartree"] = a.charTree.selected;
         output["skilltrees"] = a.skillTrees;
+        output["hud"] = a.hud;
 
         // 处理神像
         output["idols"] = [];

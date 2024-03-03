@@ -69,6 +69,7 @@ class MyWindow(QWidget):
             QMessageBox.information(self, "提示", "请填写正确的bd")
             return
         work(bdStr, savefile)
+        QMessageBox.information(self, "提示", "修改成功")
 
 
 if __name__ == "__main__":
