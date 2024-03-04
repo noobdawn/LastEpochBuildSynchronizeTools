@@ -5,6 +5,7 @@
 // @description  try to take over the world!
 // @author       You
 // @match        https://lastepoch.caimogu.cc/planner.html?id=*
+// @match        https://lastepoch.caimogu.cc/planner?id=*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=caimogu.cc
 // @grant        none
 // ==/UserScript==
