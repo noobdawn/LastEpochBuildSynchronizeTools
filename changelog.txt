@@ -1,0 +1,7 @@
+2024.03.04
+1. 修复了油猴脚本无法识别采蘑菇配装器url中planner?id=和planner.html?id=的区别
+2. 修复了执行python脚本时因为未指定Qt系统变量路径而导致报错的问题
+3. 修复了当装备只有2条词缀+1条封印词缀时，同步后存档无法使用的问题
+4. 修复了报错 "nodeIDs" : [int(x) for x in skill【"selected"】.keys()]的问题
+5. 尝试添加了对LastEpochTools的支持
+6. 增加了一些体验优化

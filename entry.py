@@ -16,7 +16,7 @@ class MyWindow(QWidget):
     def initUI(self):
         self.setWindowTitle("最后纪元离线存档同步配装器BD工具")
         # 创建用于说明的文本
-        self.label = QLabel("使用说明：\n1. 保证《最后纪元》停留在主界面，不要进入游戏，也不要停留在人物选择界面。\n2. 使用配套的油猴插件打开采蘑菇的配装器，点击“复制BD数据到剪贴板”\n3. 选择存档，并粘贴BD数据到下面的输入框中\n4. 点击“修改存档”按钮\n5. 此时方可进入人物选择界面开始游戏\n\n注意：修改存档有风险，使用前请备份存档。\n跨职业修改存档时，下方技能槽需要手动回复。")
+        self.label = QLabel("使用说明：\n1. 保证《最后纪元》停留在主界面，不要进入游戏，也不要停留在人物选择界面。\n2. 使用配套的油猴插件打开采蘑菇的配装器，点击“复制BD数据到剪贴板”\n3. 选择存档，并粘贴BD数据到下面的输入框中\n4. 点击“修改存档”按钮\n5. 此时方可进入人物选择界面开始游戏\n\n注意：修改存档有风险，背包物品会被覆盖，使用前请存好道具、备份存档。\n跨职业修改存档时，下方技能槽可能需要手动回复。")
 
         # 创建按钮
         self.openSaveButton = QPushButton("打开存档位置（手动备份用）")
@@ -35,9 +35,9 @@ class MyWindow(QWidget):
         self.textEdit.setPlaceholderText("粘贴BD到这里")
 
         # 创建勾选框
-        self.syncBdOnlyCheckBox = QCheckBox("是否仅同步BD（鼠标停留可见说明）")
-        # hint
-        self.syncBdOnlyCheckBox.setToolTip("勾选该选项后，只会同步BD相关的内容，如技能、天赋、祝福、装备、神像；\n不勾选的情况下，还会跳过剧情、解锁所有传送点、解锁地下城和竞技场难度、开启时间线等；\n若修改新创建角色的存档，最好不勾选，而如果是老角色的存档，最好勾选。")
+        self.syncBdCheckBox = QCheckBox("同步BD")
+        self.skipPlotCheckBox = QCheckBox("跳过剧情、解锁传送点、解锁地下城和竞技场难度、发现所有祝福")
+        self.syncBdCheckBox.setChecked(True)        
 
         # 创建按钮
         self.textButton = QPushButton("修改存档")
@@ -50,7 +50,7 @@ class MyWindow(QWidget):
         layout.addWidget(self.openSaveButton)
         layout.addWidget(self.button)
         layout.addWidget(self.textEdit)
-        layout.addWidget(self.syncBdOnlyCheckBox)
+        layout.addWidget(self.syncBdCheckBox)
         layout.addWidget(self.textButton)
         self.setLayout(layout)
 
@@ -89,8 +89,9 @@ class MyWindow(QWidget):
         if len(bdStr) < 20:
             QMessageBox.information(self, "提示", "请填写正确的bd")
             return
-        isSyncBdOnly = self.syncBdOnlyCheckBox.isChecked()
-        work(bdStr, savefile, isSyncBdOnly)
+        isSyncBdOnly = self.syncBdCheckBox.isChecked()
+        isSkipPlot = self.skipPlotCheckBox.isChecked()
+        work(bdStr, savefile, isSyncBdOnly, isSkipPlot)
         QMessageBox.information(self, "提示", "修改成功")
         self.textEdit.clear()
 

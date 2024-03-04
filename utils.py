@@ -1,6 +1,6 @@
 import json
 
-def work(bdStr, saveFilePath, isSyncBdOnly):
+def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot):
     bd = json.loads(bdStr)
 
     data = None
@@ -13,7 +13,7 @@ def work(bdStr, saveFilePath, isSyncBdOnly):
 
     data["level"] = 100                                                 # 调整等级
 
-    if not isSyncBdOnly:
+    if isSkipPlot:
         data["arenaTiersCompleted"] = [0, 1, 2, 3]                          # 调整竞技场层数
         data["blessingsDiscovered"] = [ x for x in range(224) ]             # 调整已发现祝福
         data["dungeonCompletion"] = [ 
@@ -35,58 +35,59 @@ def work(bdStr, saveFilePath, isSyncBdOnly):
         data["timelineCompletion"] = [{"timelineID":1,"progress":[1,0]},{"timelineID":2,"progress":[1,0]},{"timelineID":3,"progress":[1,0]},{"timelineID":4,"progress":[1,0]},{"timelineID":5,"progress":[1,0]},{"timelineID":6,"progress":[1,0]},{"timelineID":7,"progress":[1,0]},{"timelineID":8,"progress":[1,0]},{"timelineID":9,"progress":[1,0]},{"timelineID":10,"progress":[1,0]}]
         data["timelineDifficultyUnlocks"] = [{"timelineID":1,"progress":[0,1]},{"timelineID":2,"progress":[0,1]},{"timelineID":3,"progress":[0,1]},{"timelineID":4,"progress":[0,1]},{"timelineID":5,"progress":[0,1]},{"timelineID":6,"progress":[0,1]},{"timelineID":7,"progress":[0,1]},{"timelineID":8,"progress":[0,1]},{"timelineID":9,"progress":[0,1]},{"timelineID":10,"progress":[0,1]}]
         
-    # 设置祝福
-    data["savedItems"] = [{"itemData":"","data":[1,34,1,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":33,"formatVersion":2},{"itemData":"","data":[1,34,24,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":34,"formatVersion":2},{"itemData":"","data":[1,34,47,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":35,"formatVersion":2},{"itemData":"","data":[1,34,128,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":36,"formatVersion":2},{"itemData":"","data":[1,34,73,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":37,"formatVersion":2},{"itemData":"","data":[1,34,137,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":38,"formatVersion":2},{"itemData":"","data":[1,34,151,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":39,"formatVersion":2},{"itemData":"","data":[1,34,173,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":43,"formatVersion":2},{"itemData":"","data":[1,34,199,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":44,"formatVersion":2},{"itemData":"","data":[1,34,205,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":45,"formatVersion":2}]
-    for i in range(10):
-        if str(i) in bd["blessing"].keys():
-            bless_id = bd["blessing"][str(i)]
-            data["savedItems"][i]["data"] = [1, 34, bless_id, 0, 255, 255, 255, 0, 0, 0]
-    # 设置职业
-    data["characterClass"] = bd["class"]
-    data["chosenMastery"] = bd["mastery"]
-    # 设置天赋树
-    totalPoints = 113
-    nodeIDs = [int(x) for x in bd["chartree"].keys()]
-    nodePoints = list(bd["chartree"].values())
-    unspentPoints = totalPoints - sum(nodePoints)
-    data["savedCharacterTree"]["nodeIDs"] = nodeIDs
-    data["savedCharacterTree"]["nodePoints"] = nodePoints
-    data["savedCharacterTree"]["unspentPoints"] = unspentPoints
-    # 设置技能树
-    data_skill_trees = []
-    for skill in bd["skilltrees"]:
-        # 如果不是字典的话，就跳过
-        if type(skill["selected"]) is not dict:
-            continue
-        data_skill = {
-            "treeID" : skill["treeID"],
-            "slotNumber" : skill["slotNumber"],
-            "xp" : 13000000,
-            "version" : skill["version"],
-            "nodeIDs" : [int(x) for x in skill["selected"].keys()],
-            "nodePoints" : list(skill["selected"].values()),
-            "unspentPoints" : 0,
-            "nodesTaken" : None,
-            "abilityXP" : 0.0
-        }
-        data_skill_trees.append(data_skill)
-    data["savedSkillTrees"] = data_skill_trees
-    if bd.get("hud") is not None:
-        data["abilityBar"] = bd["hud"]
-    # 设置神像
-    idol_idx = 0
-    for idol in bd["idols"]:
-        if idol is not None:
-            # 插入到最前面
-            data["savedItems"].insert(idol_idx, idol)
-            idol_idx += 1
+    if isSyncBdOnly:
+        # 设置祝福
+        data["savedItems"] = [{"itemData":"","data":[1,34,1,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":33,"formatVersion":2},{"itemData":"","data":[1,34,24,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":34,"formatVersion":2},{"itemData":"","data":[1,34,47,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":35,"formatVersion":2},{"itemData":"","data":[1,34,128,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":36,"formatVersion":2},{"itemData":"","data":[1,34,73,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":37,"formatVersion":2},{"itemData":"","data":[1,34,137,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":38,"formatVersion":2},{"itemData":"","data":[1,34,151,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":39,"formatVersion":2},{"itemData":"","data":[1,34,173,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":43,"formatVersion":2},{"itemData":"","data":[1,34,199,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":44,"formatVersion":2},{"itemData":"","data":[1,34,205,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":45,"formatVersion":2}]
+        for i in range(10):
+            if str(i) in bd["blessing"].keys():
+                bless_id = bd["blessing"][str(i)]
+                data["savedItems"][i]["data"] = [1, 34, bless_id, 0, 255, 255, 255, 0, 0, 0]
+        # 设置职业
+        data["characterClass"] = bd["class"]
+        data["chosenMastery"] = bd["mastery"]
+        # 设置天赋树
+        totalPoints = 113
+        nodeIDs = [int(x) for x in bd["chartree"].keys()]
+        nodePoints = list(bd["chartree"].values())
+        unspentPoints = totalPoints - sum(nodePoints)
+        data["savedCharacterTree"]["nodeIDs"] = nodeIDs
+        data["savedCharacterTree"]["nodePoints"] = nodePoints
+        data["savedCharacterTree"]["unspentPoints"] = unspentPoints
+        # 设置技能树
+        data_skill_trees = []
+        for skill in bd["skilltrees"]:
+            # 如果不是字典的话，就跳过
+            if type(skill["selected"]) is not dict:
+                continue
+            data_skill = {
+                "treeID" : skill["treeID"],
+                "slotNumber" : skill["slotNumber"],
+                "xp" : 13000000,
+                "version" : skill["version"],
+                "nodeIDs" : [int(x) for x in skill["selected"].keys()],
+                "nodePoints" : list(skill["selected"].values()),
+                "unspentPoints" : 0,
+                "nodesTaken" : None,
+                "abilityXP" : 0.0
+            }
+            data_skill_trees.append(data_skill)
+        data["savedSkillTrees"] = data_skill_trees
+        if bd.get("hud") is not None:
+            data["abilityBar"] = bd["hud"]
+        # 设置神像
+        idol_idx = 0
+        for idol in bd["idols"]:
+            if idol is not None:
+                # 插入到最前面
+                data["savedItems"].insert(idol_idx, idol)
+                idol_idx += 1
 
-    # 设置装备
-    equip_idx = 0
-    for equip in bd["equipment"]:
-        if equip is not None:
-            data["savedItems"].insert(equip_idx, equip)
-            idol_idx += 1
+        # 设置装备
+        equip_idx = 0
+        for equip in bd["equipment"]:
+            if equip is not None:
+                data["savedItems"].insert(equip_idx, equip)
+                idol_idx += 1
 
 
     with open(saveFilePath, 'w', encoding='utf-8') as f:
