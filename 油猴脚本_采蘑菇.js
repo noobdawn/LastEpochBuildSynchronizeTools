@@ -98,6 +98,7 @@
 
         output["chartree"] = a.charTree.selected;
         output["skilltrees"] = a.skillTrees;
+        output["hud"] = a.hud;
 
         // 处理神像
         output["idols"] = [];
@@ -238,105 +239,112 @@
             g.item && null != k && (f = $db.Rf(g.item.baseTypeId, g.item.subTypeId, k)) && (le_ej(f, g),
                                                                                             g = f);
             le_ij(e, g);
-            // 判断传奇
-            output["equipment"][idx] = {};
-            output["equipment"][idx]["itemData"] = null;
-            let isUnique = false;
-            if (g.item.uniqueId)
-                isUnique = true;
-            let isSet = false;
-            if (g.item.isSetItem == 1)
-                isSet = true;
-            output["equipment"][idx]["data"] = [2, g.item.baseTypeId, g.item.subTypeId]
-            // todo, 判断稀有度，4为普通装，7为传奇，8为套装，9为红色
-            let rarity = g.item.rarity;
-            if (isSet)
-                rarity = 8;
-            else if (!isUnique)
-                rarity = 4;
-            else if (f.affixes.length == 0)
-                rarity = 7;
-            else
-                rarity = 9;
-            output["equipment"][idx]["data"][3] = rarity;
-            // 基底属性Roll值
-            output["equipment"][idx]["data"][4] = 128;
-            output["equipment"][idx]["data"][5] = 255;
-            output["equipment"][idx]["data"][6] = 255;
-            output["equipment"][idx]["data"][7] = 255;
-            let affix_id = 0;
-            let affix_start = 0;
-            if (isUnique)
+
+            if (g.item)
             {
-                // 传奇主副ID
-                output["equipment"][idx]["data"][8] = (g.item.uniqueId - g.item.uniqueId % 256) / 256;
-                output["equipment"][idx]["data"][9] = g.item.uniqueId % 256;
-                // 固有属性Roll值
-                output["equipment"][idx]["data"][10] = 255;
-                output["equipment"][idx]["data"][11] = 255;
-                output["equipment"][idx]["data"][12] = 255;
-                output["equipment"][idx]["data"][13] = 255;
-                output["equipment"][idx]["data"][14] = 255;
-                output["equipment"][idx]["data"][15] = 255;
-                output["equipment"][idx]["data"][16] = 255;
-                output["equipment"][idx]["data"][17] = 255;
-                // 传奇潜能数
-                output["equipment"][idx]["data"][18] = f.affixes.length;
-                affix_start = 19;
-            }
-            else
-            {
-                // 锻造潜能
-                output["equipment"][idx]["data"][8] = 255;
-                // 封印词缀
-                let isSealed = false;
-                if (f.sealedAffix != null)
-                    isSealed = true;
-                if (isSealed)
-                    output["equipment"][idx]["data"][9] = 133;
+                // 判断传奇
+                output["equipment"][idx] = {};
+                output["equipment"][idx]["itemData"] = null;
+                let isUnique = false;
+                // 如果g.item.uniqueId存在且不为空字典
+                if (g.item.uniqueId)
+                    isUnique = true;
+                let isSet = false;
+                if (g.item.isSetItem == 1)
+                    isSet = true;
+                output["equipment"][idx]["data"] = [2, g.item.baseTypeId, g.item.subTypeId]
+                // todo, 判断稀有度，4为普通装，7为传奇，8为套装，9为红色
+                let rarity = g.item.rarity;
+                if (isSet)
+                    rarity = 8;
+                else if (!isUnique)
+                    rarity = 4;
+                else if (f.affixes.length == 0)
+                    rarity = 7;
                 else
-                    output["equipment"][idx]["data"][9] = f.affixes.length;
-                if (isSealed)
+                    rarity = 9;
+                output["equipment"][idx]["data"][3] = rarity;
+                // 基底属性Roll值
+                output["equipment"][idx]["data"][4] = 128;
+                output["equipment"][idx]["data"][5] = 255;
+                output["equipment"][idx]["data"][6] = 255;
+                output["equipment"][idx]["data"][7] = 255;
+                let affix_id = 0;
+                let affix_start = 0;
+                if (isUnique)
                 {
-                    output["equipment"][idx]["data"][10] = get_value_from_tier(f.sealedAffix.tier) + (g.Y.affixId - g.Y.affixId % 256) / 256;
-                    output["equipment"][idx]["data"][11] = g.Y.affixId % 256;
+                    // 传奇主副ID
+                    output["equipment"][idx]["data"][8] = (g.item.uniqueId - g.item.uniqueId % 256) / 256;
+                    output["equipment"][idx]["data"][9] = g.item.uniqueId % 256;
+                    // 固有属性Roll值
+                    output["equipment"][idx]["data"][10] = 255;
+                    output["equipment"][idx]["data"][11] = 255;
                     output["equipment"][idx]["data"][12] = 255;
-                    affix_start = 13;
+                    output["equipment"][idx]["data"][13] = 255;
+                    output["equipment"][idx]["data"][14] = 255;
+                    output["equipment"][idx]["data"][15] = 255;
+                    output["equipment"][idx]["data"][16] = 255;
+                    output["equipment"][idx]["data"][17] = 255;
+                    // 传奇潜能数
+                    output["equipment"][idx]["data"][18] = f.affixes.length;
+                    affix_start = 19;
                 }
                 else
-                    affix_start = 10;
+                {
+                    // 锻造潜能
+                    output["equipment"][idx]["data"][8] = 255;
+                    // 封印词缀
+                    let isSealed = false;
+                    if (f.sealedAffix != null)
+                        isSealed = true;
+                    let affixes_count = f.affixes.length;
+                    if (isSealed)
+                        affixes_count++;
+                    if (affixes_count >= 5)
+                        affixes_count = 133
+                    output["equipment"][idx]["data"][9] = affixes_count;
+                    if (isSealed)
+                    {
+                        output["equipment"][idx]["data"][10] = get_value_from_tier(f.sealedAffix.tier) + (g.Y.affixId - g.Y.affixId % 256) / 256;
+                        output["equipment"][idx]["data"][11] = g.Y.affixId % 256;
+                        output["equipment"][idx]["data"][12] = 255;
+                        affix_start = 13;
+                    }
+                    else
+                        affix_start = 10;
+                }
+                if (g.O){
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.O.affixId - g.O.affixId % 256) / 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.O.affixId % 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
+                    affix_id++;
+                }
+                if (g.X) {
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.X.affixId - g.X.affixId % 256) / 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.X.affixId % 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
+                    affix_id++;
+                }
+                if (g.P) {
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.P.affixId - g.P.affixId % 256) / 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.P.affixId % 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
+                    affix_id++;
+                }
+                if (g.aa) {
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.aa.affixId - g.aa.affixId % 256) / 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.aa.affixId % 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
+                    affix_id++;
+                }
+                output["equipment"][idx]["inventoryPosition"] = {"x":0,"y":0};
+                output["equipment"][idx]["quantity"] = 1;
+                output["equipment"][idx]["containerID"] = get_container_id(e);
+                output["equipment"][idx]["formatVersion"] = 2;
+                if (!isUnique)
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = 0;
+                idx++;
             }
-            if (g.O){
-                output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.O.affixId - g.O.affixId % 256) / 256;
-                output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.O.affixId % 256;
-                output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
-                affix_id++;
-            }
-            if (g.X) {
-                output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.X.affixId - g.X.affixId % 256) / 256;
-                output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.X.affixId % 256;
-                output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
-                affix_id++;
-            }
-            if (g.P) {
-                output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.P.affixId - g.P.affixId % 256) / 256;
-                output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.P.affixId % 256;
-                output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
-                affix_id++;
-            }
-            if (g.aa) {
-                output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.aa.affixId - g.aa.affixId % 256) / 256;
-                output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.aa.affixId % 256;
-                output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
-                affix_id++;
-            }
-            output["equipment"][idx]["inventoryPosition"] = {"x":0,"y":0};
-            output["equipment"][idx]["quantity"] = 1;
-            output["equipment"][idx]["containerID"] = get_container_id(e);
-            output["equipment"][idx]["formatVersion"] = 2;
-            if (!isUnique)
-                output["equipment"][idx]["data"][affix_start + affix_id * 3] = 0;
-            idx++;
         });
 
         console.log(JSON.stringify(output));
