@@ -43,6 +43,9 @@ class MyWindow(QWidget):
         self.textButton = QPushButton("修改存档")
         self.textButton.clicked.connect(self.modifySaveFile)
 
+        # 创建超链接
+        self.githubLink = QLabel("<a href=https://github.com/noobdawn/LastEpochBuildSynchronizeTools"">Github</a>")
+
         # 设置布局
         layout = QVBoxLayout()
         layout.addWidget(self.label)
@@ -51,7 +54,9 @@ class MyWindow(QWidget):
         layout.addWidget(self.button)
         layout.addWidget(self.textEdit)
         layout.addWidget(self.syncBdCheckBox)
+        layout.addWidget(self.skipPlotCheckBox)
         layout.addWidget(self.textButton)
+        layout.addWidget(self.githubLink)
         self.setLayout(layout)
 
     def refreshSaveFiles(self):
@@ -71,7 +76,6 @@ class MyWindow(QWidget):
 
     def openSaveFile(self):
         user = os.getlogin()
-        print(f"[appShare]openSaveFile: {user}")
         path = f"C:/Users/{user}/AppData/LocalLow/Eleventh Hour Games/Last Epoch/Saves"
         os.startfile(path)
         
