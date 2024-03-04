@@ -1,7 +1,11 @@
 import os
 import sys
+
+# 为防止报错，手动指定一下PyQt5的系统变量
+os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = os.path.abspath("Python36/Lib/site-packages/PyQt5/Qt5/plugins")
+
 import json
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QComboBox, QTextEdit, QLabel, QMessageBox
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QComboBox, QTextEdit, QLabel, QMessageBox, QCheckBox
 from utils import work
 
 class MyWindow(QWidget):
@@ -13,6 +17,10 @@ class MyWindow(QWidget):
         self.setWindowTitle("最后纪元离线存档同步配装器BD工具")
         # 创建用于说明的文本
         self.label = QLabel("使用说明：\n1. 保证《最后纪元》停留在主界面，不要进入游戏，也不要停留在人物选择界面。\n2. 使用配套的油猴插件打开采蘑菇的配装器，点击“复制BD数据到剪贴板”\n3. 选择存档，并粘贴BD数据到下面的输入框中\n4. 点击“修改存档”按钮\n5. 此时方可进入人物选择界面开始游戏\n\n注意：修改存档有风险，使用前请备份存档。\n跨职业修改存档时，下方技能槽需要手动回复。")
+
+        # 创建按钮
+        self.openSaveButton = QPushButton("打开存档位置（手动备份用）")
+        self.openSaveButton.clicked.connect(self.openSaveFile)
 
         # 创建下拉框
         self.comboBox = QComboBox()
@@ -26,6 +34,11 @@ class MyWindow(QWidget):
         self.textEdit = QTextEdit()
         self.textEdit.setPlaceholderText("粘贴BD到这里")
 
+        # 创建勾选框
+        self.syncBdOnlyCheckBox = QCheckBox("是否仅同步BD（鼠标停留可见说明）")
+        # hint
+        self.syncBdOnlyCheckBox.setToolTip("勾选该选项后，只会同步BD相关的内容，如技能、天赋、祝福、装备、神像；\n不勾选的情况下，还会跳过剧情、解锁所有传送点、解锁地下城和竞技场难度、开启时间线等；\n若修改新创建角色的存档，最好不勾选，而如果是老角色的存档，最好勾选。")
+
         # 创建按钮
         self.textButton = QPushButton("修改存档")
         self.textButton.clicked.connect(self.modifySaveFile)
@@ -34,8 +47,10 @@ class MyWindow(QWidget):
         layout = QVBoxLayout()
         layout.addWidget(self.label)
         layout.addWidget(self.comboBox)
+        layout.addWidget(self.openSaveButton)
         layout.addWidget(self.button)
         layout.addWidget(self.textEdit)
+        layout.addWidget(self.syncBdOnlyCheckBox)
         layout.addWidget(self.textButton)
         self.setLayout(layout)
 
@@ -47,12 +62,18 @@ class MyWindow(QWidget):
         path = f"C:/Users/{user}/AppData/LocalLow/Eleventh Hour Games/Last Epoch/Saves/"
         files = os.listdir(path)
         for file in files:
-            if file.find("CHARACTERSLOT") != -1 and not file.endswith(".bak"):
+            if file.find("CHARACTERSLOT") != -1 and not file.endswith(".bak") and not file.endswith("_temp"):
                 with open(path + file, "r") as f:
                     savedata = json.loads(f.read()[5:])
                     charname = savedata["characterName"]
                     slot = savedata["slot"]
                     self.comboBox.addItem(f"{charname} - {slot}")
+
+    def openSaveFile(self):
+        user = os.getlogin()
+        print(f"[appShare]openSaveFile: {user}")
+        path = f"C:/Users/{user}/AppData/LocalLow/Eleventh Hour Games/Last Epoch/Saves"
+        os.startfile(path)
         
 
     def modifySaveFile(self):
@@ -68,8 +89,10 @@ class MyWindow(QWidget):
         if len(bdStr) < 20:
             QMessageBox.information(self, "提示", "请填写正确的bd")
             return
-        work(bdStr, savefile)
+        isSyncBdOnly = self.syncBdOnlyCheckBox.isChecked()
+        work(bdStr, savefile, isSyncBdOnly)
         QMessageBox.information(self, "提示", "修改成功")
+        self.textEdit.clear()
 
 
 if __name__ == "__main__":
