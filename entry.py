@@ -45,7 +45,12 @@ class MyWindow(QWidget):
         # 创建勾选框
         self.syncBdCheckBox = QCheckBox("同步BD")
         self.skipPlotCheckBox = QCheckBox("跳过剧情、解锁传送点、解锁地下城和竞技场难度、发现所有祝福")
-        self.syncBdCheckBox.setChecked(True)        
+        self.syncBdCheckBox.setChecked(True)
+        self.addStablityCheckBox = QCheckBox("为时间线添加稳定性（鼠标停留查看说明）")
+        self.overwriteStablityCheckBox = QCheckBox("重置时间线（鼠标停留查看说明）")
+        self.addStablityCheckBox.setToolTip("添加稳定性：为现在所有打过的时间线增加5000稳定性；\n重置时间线：将所有时间线清空并设定为0腐化5000稳定性；\n在修改时间线时，如果你是新号，需要勾选【重置时间线】，如果你已经打过时间线，则千万不要勾选！！！")
+        self.overwriteStablityCheckBox.setToolTip("添加稳定性：为现在所有打过的时间线增加5000稳定性；\n重置时间线：将所有时间线清空并设定为0腐化5000稳定性；\n在修改时间线时，如果你是新号，需要勾选【重置时间线】，如果你已经打过时间线，则千万不要勾选！！！")
+        
 
         # 创建按钮
         self.textButton = QPushButton("修改存档")
@@ -63,6 +68,8 @@ class MyWindow(QWidget):
         layout.addWidget(self.textEdit)
         layout.addWidget(self.syncBdCheckBox)
         layout.addWidget(self.skipPlotCheckBox)
+        layout.addWidget(self.addStablityCheckBox)
+        layout.addWidget(self.overwriteStablityCheckBox)
         layout.addWidget(self.textButton)
         layout.addWidget(self.githubLink)
         self.setLayout(layout)
@@ -91,12 +98,14 @@ class MyWindow(QWidget):
         savefile = os.path.join(self.save_path, f"1CHARACTERSLOT_BETA_{slot}")
         # 获取bd
         bdStr = self.textEdit.toPlainText()
-        if len(bdStr) < 20:
-            QMessageBox.information(self, "提示", "请填写正确的bd")
-            return
         isSyncBdOnly = self.syncBdCheckBox.isChecked()
         isSkipPlot = self.skipPlotCheckBox.isChecked()
-        work(bdStr, savefile, isSyncBdOnly, isSkipPlot)
+        isAddStablity = self.addStablityCheckBox.isChecked()
+        isOverwriteStablity = self.overwriteStablityCheckBox.isChecked()
+        if len(bdStr) < 20 and isSyncBdOnly:
+            QMessageBox.information(self, "提示", "请填写正确的bd")
+            return
+        work(bdStr, savefile, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity)
         QMessageBox.information(self, "提示", "修改成功")
         self.textEdit.clear()
 

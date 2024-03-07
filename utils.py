@@ -32,9 +32,7 @@ def save_info(save_path):
         f.write(json.dumps(settings, indent=4))
 
 
-def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot):
-    bd = json.loads(bdStr)
-
+def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity):
     data = None
     with open(saveFilePath, 'r', encoding='utf-8') as f:
         data = json.loads(f.read()[5:])
@@ -68,6 +66,8 @@ def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot):
         data["timelineDifficultyUnlocks"] = [{"timelineID":1,"progress":[0,1]},{"timelineID":2,"progress":[0,1]},{"timelineID":3,"progress":[0,1]},{"timelineID":4,"progress":[0,1]},{"timelineID":5,"progress":[0,1]},{"timelineID":6,"progress":[0,1]},{"timelineID":7,"progress":[0,1]},{"timelineID":8,"progress":[0,1]},{"timelineID":9,"progress":[0,1]},{"timelineID":10,"progress":[0,1]}]
         
     if isSyncBdOnly:
+        bd = json.loads(bdStr)
+
         # 设置祝福
         data["savedItems"] = [{"itemData":"","data":[1,34,1,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":33,"formatVersion":2},{"itemData":"","data":[1,34,24,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":34,"formatVersion":2},{"itemData":"","data":[1,34,47,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":35,"formatVersion":2},{"itemData":"","data":[1,34,128,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":36,"formatVersion":2},{"itemData":"","data":[1,34,73,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":37,"formatVersion":2},{"itemData":"","data":[1,34,137,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":38,"formatVersion":2},{"itemData":"","data":[1,34,151,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":39,"formatVersion":2},{"itemData":"","data":[1,34,173,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":43,"formatVersion":2},{"itemData":"","data":[1,34,199,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":44,"formatVersion":2},{"itemData":"","data":[1,34,205,0,255,255,255,0,0,0],"inventoryPosition":{"x":0,"y":0},"quantity":1,"containerID":45,"formatVersion":2}]
         for i in range(10):
@@ -123,6 +123,20 @@ def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot):
                 data["savedItems"].insert(equip_idx, equip)
                 idol_idx += 1
 
+    if isOverwriteStablity:
+        data["monolithRuns"] = []
+        for i in range(10):
+            for j in range(2):
+                data["monolithRuns"].append({
+                    "timelineID": i + 1,
+                    "difficultyIndex":j,
+                    "stability":5000,
+                })
+
+    if isAddStablity:
+        if data.get("monolithRuns") is not None:
+            for i in range(len(data["monolithRuns"])):
+                data["monolithRuns"][i]["stability"] += 5000
 
     with open(saveFilePath, 'w', encoding='utf-8') as f:
         f.write('EPOCH' + json.dumps(data))
