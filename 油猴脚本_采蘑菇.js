@@ -43,7 +43,7 @@
     function get_value_from_tier(tier) {
         return (tier - 1) * 16;
     }
-
+    
     function get_container_id(typestr) {
         switch (typestr) {
             case "weapon1":
@@ -72,10 +72,10 @@
                 return 29;
         }
     }
-
+    
     function le_work(a){
         const output = {};
-
+    
         // 处理祝福
         output["blessing"] = {};
         const d = a.blessings;
@@ -85,42 +85,42 @@
         $.each(d, function(e, f) {
             if (f) {
                 const g = {};
-                $.isPlainObject(f) ? (g.item = f.id && le_Yj(f.id),
-                                      g.Wa = f.ir) : (g.item = f && le_Yj(f),
-                                                      g.Wa = []);
-                le_hj("blessing", g, e)
+                $.isPlainObject(f) ? (g.item = f.id && le_Zj(f.id),
+                g.Wa = f.ir) : (g.item = f && le_Zj(f),
+                g.Wa = []);
                 output["blessing"][e] = g.item.subTypeId;
+                le_hj("blessing", g, e)
             }
         });
-
+    
         output["class"] = a.bio.characterClass;
         output["mastery"] = a.bio.chosenMastery;
-
+    
         output["chartree"] = a.charTree.selected;
         output["skilltrees"] = a.skillTrees;
         output["hud"] = a.hud;
-
+    
         // 处理神像
         output["idols"] = [];
         let idx = 0;
         $.each(a.idols, function(e, f) {
             e = f.x;
             const g = f.y
-            , k = {};
-            k.item = f.id && le_Yj(f.id);
-            var l = le__j(f.affixes);
+              , k = {};
+            k.item = f.id && le_Zj(f.id);
+            var l = le_0j(f.affixes);
             const n = l.vg;
             l = l.suffixes;
             n[0] && (k.O = n[0].data,
-                     k.pa = n[0].mb,
-                     k.sb = n[0].Sb);
+            k.pa = n[0].mb,
+            k.tb = n[0].Sb);
             l[0] && (k.P = l[0].data,
-                     k.qa = l[0].mb,
-                     k.tb = l[0].Sb);
+            k.qa = l[0].mb,
+            k.ub = l[0].Sb);
             k.Wa = f.ir;
-            k.Ya = f.ur;
-            le_gj(k, e, g, !0)
-
+            k.Za = f.ur;
+            le_hj(k, e, g, !0)
+    
             // 神像处理
             output["idols"][idx] = {};
             output["idols"][idx]["itemData"] = null;
@@ -195,7 +195,7 @@
             output["idols"][idx]["inventoryPosition"] = {"x":x,"y":y};
             idx++;
         });
-
+    
         idx = 0;
         output["equipment"] = [];
         const c = a.equipment;
@@ -207,39 +207,39 @@
         $db.is2hItem(c.weapon1 && c.weapon1.id && le_Yj(c.weapon1.id)) && delete c.weapon2;
         $.each(c, function(e, f) {
             let g = {};
-            g.item = f.id && le_Yj(f.id);
-            var k = le__j(f.affixes)
-            , l = k.vg;
+            g.item = f.id && le_Zj(f.id);
+            var k = le_0j(f.affixes)
+              , l = k.vg;
             const n = k.suffixes;
             k = null;
             l[0] && (g.O = l[0].data,
-                     g.pa = l[0].mb,
-                     g.sb = l[0].Sb,
-                     g.O && 2 == g.O.specialAffixType && (k = g.O.id));
+            g.pa = l[0].mb,
+            g.tb = l[0].Sb,
+            g.O && 2 == g.O.specialAffixType && (k = g.O.id));
             l[1] && (g.X = l[1].data,
-                     g.Da = l[1].mb,
-                     g.Pc = l[1].Sb,
-                     g.X && 2 == g.X.specialAffixType && (k = g.X.id));
+            g.Da = l[1].mb,
+            g.Qc = l[1].Sb,
+            g.X && 2 == g.X.specialAffixType && (k = g.X.id));
             n[0] && (g.P = n[0].data,
-                     g.qa = n[0].mb,
-                     g.tb = n[0].Sb,
-                     g.P && 2 == g.P.specialAffixType && (k = g.P.id));
+            g.qa = n[0].mb,
+            g.ub = n[0].Sb,
+            g.P && 2 == g.P.specialAffixType && (k = g.P.id));
             n[1] && (g.aa = n[1].data,
-                     g.Ea = n[1].mb,
-                     g.Wc = n[1].Sb,
-                     g.aa && 2 == g.aa.specialAffixType && (k = g.aa.id));
-            f.sealedAffix && (l = le_0j(f.sealedAffix),
-                              g.Y = l.data,
-                              g.Ga = l.mb,
-                              g.Rc = l.Sb,
-                              g.Y && 2 == g.Y.specialAffixType && (k = g.Y.id));
+            g.Ea = n[1].mb,
+            g.Xc = n[1].Sb,
+            g.aa && 2 == g.aa.specialAffixType && (k = g.aa.id));
+            f.sealedAffix && (l = le_1j(f.sealedAffix),
+            g.Y = l.data,
+            g.Ga = l.mb,
+            g.Sc = l.Sb,
+            g.Y && 2 == g.Y.specialAffixType && (k = g.Y.id));
             g.Wa = f.ir;
-            g.Ya = f.ur;
+            g.Za = f.ur;
             g.Cc = f.faction;
-            g.item && null != k && (f = $db.Rf(g.item.baseTypeId, g.item.subTypeId, k)) && (le_ej(f, g),
-                                                                                            g = f);
-            le_ij(e, g);
-
+            g.item && null != k && (f = $db.Rf(g.item.baseTypeId, g.item.subTypeId, k)) && (le_fj(f, g),
+            g = f);
+            le_jj(e, g)
+    
             if (g.item)
             {
                 // 判断传奇
@@ -346,7 +346,7 @@
                 idx++;
             }
         });
-
+    
         console.log(JSON.stringify(output));
         return (JSON.stringify(output));
     }
