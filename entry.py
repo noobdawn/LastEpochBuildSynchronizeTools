@@ -5,13 +5,21 @@ import sys
 os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = os.path.abspath("Python36/Lib/site-packages/PyQt5/Qt5/plugins")
 
 import json
-from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QComboBox, QTextEdit, QLabel, QMessageBox, QCheckBox
-from utils import work
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QComboBox, QTextEdit, QLabel, QMessageBox, QCheckBox, QFileDialog
+from utils import *
 
 class MyWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+
+        load_info()
+        save_path = get_info("savePath")
+        while (save_path is None or not os.path.exists(save_path)):
+            QMessageBox.information(self, "提示", "未能找到存档，请手动设置存档路径")
+            save_path = QFileDialog.getExistingDirectory(self, "选择存档路径")
+            save_info(save_path)
+        self.save_path = save_path
 
     def initUI(self):
         self.setWindowTitle("最后纪元离线存档同步配装器BD工具")
@@ -60,24 +68,17 @@ class MyWindow(QWidget):
         self.setLayout(layout)
 
     def refreshSaveFiles(self):
-        # 清空下拉框
-        self.comboBox.clear()
-        # 遍历C:/Users/{用户名}/AppData/LocalLow/Eleventh Hour Games/Last Epoch/Saves/
-        user = os.getlogin()
-        path = f"C:/Users/{user}/AppData/LocalLow/Eleventh Hour Games/Last Epoch/Saves/"
-        files = os.listdir(path)
+        files = os.listdir(self.save_path)
         for file in files:
             if file.find("CHARACTERSLOT") != -1 and not file.endswith(".bak") and not file.endswith("_temp"):
-                with open(path + file, "r") as f:
+                with open(os.path.join(self.save_path, file), "r") as f:
                     savedata = json.loads(f.read()[5:])
                     charname = savedata["characterName"]
                     slot = savedata["slot"]
                     self.comboBox.addItem(f"{charname} - {slot}")
 
     def openSaveFile(self):
-        user = os.getlogin()
-        path = f"C:/Users/{user}/AppData/LocalLow/Eleventh Hour Games/Last Epoch/Saves"
-        os.startfile(path)
+        os.startfile(self.save_path)
         
 
     def modifySaveFile(self):
@@ -87,7 +88,7 @@ class MyWindow(QWidget):
             QMessageBox.information(self, "提示", "请选择存档")
             return
         slot = selected.split(" - ")[1]
-        savefile = f"C:/Users/{os.getlogin()}/AppData/LocalLow/Eleventh Hour Games/Last Epoch/Saves/1CHARACTERSLOT_BETA_{slot}"
+        savefile = os.path.join(self.save_path, f"1CHARACTERSLOT_BETA_{slot}")
         # 获取bd
         bdStr = self.textEdit.toPlainText()
         if len(bdStr) < 20:

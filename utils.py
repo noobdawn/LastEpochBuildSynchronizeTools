@@ -1,4 +1,36 @@
 import json
+import os
+
+settings = {}
+
+
+def get_info(key):
+    global settings
+    return settings.get(key, None)
+
+
+def load_info():
+    global settings
+    if not os.path.exists("settings.inf"):
+        user = os.getlogin()
+        path = f"C:/Users/{user}/AppData/LocalLow/Eleventh Hour Games/Last Epoch/Saves"
+        # 创建一个默认的配置文件
+        settings = {
+            "savePath": path,
+        }
+        with open("settings.inf", "w", encoding="utf-8") as f:
+            f.write(json.dumps(settings, indent=4))
+    else:
+        with open("settings.inf", "r", encoding="utf-8") as f:
+            settings = json.loads(f.read())
+            print(f.read())
+
+def save_info(save_path):
+    global settings
+    settings["savePath"] = save_path
+    with open("settings.inf", "w", encoding="utf-8") as f:
+        f.write(json.dumps(settings, indent=4))
+
 
 def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot):
     bd = json.loads(bdStr)
@@ -63,13 +95,15 @@ def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot):
                 "treeID" : skill["treeID"],
                 "slotNumber" : skill["slotNumber"],
                 "xp" : 13000000,
-                "version" : skill["version"],
                 "nodeIDs" : [int(x) for x in skill["selected"].keys()],
                 "nodePoints" : list(skill["selected"].values()),
                 "unspentPoints" : 0,
                 "nodesTaken" : None,
                 "abilityXP" : 0.0
             }
+            # 官网天梯的版本不带version
+            if skill.get("version") is not None:
+                data_skill["version"] = skill["version"]
             data_skill_trees.append(data_skill)
         data["savedSkillTrees"] = data_skill_trees
         if bd.get("hud") is not None:
