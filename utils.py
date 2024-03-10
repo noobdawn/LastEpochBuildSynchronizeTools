@@ -32,7 +32,7 @@ def save_info(save_path):
         f.write(json.dumps(settings, indent=4))
 
 
-def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity):
+def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity, corruption):
     data = None
     with open(saveFilePath, 'r', encoding='utf-8') as f:
         data = json.loads(f.read()[5:])
@@ -79,8 +79,16 @@ def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwri
         data["chosenMastery"] = bd["mastery"]
         # 设置天赋树
         totalPoints = 113
-        nodeIDs = [int(x) for x in bd["chartree"].keys()]
-        nodePoints = list(bd["chartree"].values())
+        if type(bd["chartree"]) is dict:
+            nodeIDs = [int(x) for x in bd["chartree"].keys()]
+            nodePoints = list(bd["chartree"].values())
+        else:
+            nodeIDs = []
+            nodePoints = []
+            for i, v in enumerate(bd["chartree"]):
+                if v is not None:
+                    nodeIDs.append(i)
+                    nodePoints.append(v)
         unspentPoints = totalPoints - sum(nodePoints)
         data["savedCharacterTree"]["nodeIDs"] = nodeIDs
         data["savedCharacterTree"]["nodePoints"] = nodePoints
@@ -137,6 +145,13 @@ def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwri
         if data.get("monolithRuns") is not None:
             for i in range(len(data["monolithRuns"])):
                 data["monolithRuns"][i]["stability"] += 5000
+
+    if corruption >= 0:
+        if data.get("monolithRuns") is not None:
+            for i in range(len(data["monolithRuns"])):
+                if data["monolithRuns"][i].get("savedEchoWeb") is None:
+                    data["monolithRuns"][i]["savedEchoWeb"] = {}
+                data["monolithRuns"][i]["savedEchoWeb"]["corruption"] = corruption
 
     with open(saveFilePath, 'w', encoding='utf-8') as f:
         f.write('EPOCH' + json.dumps(data))
