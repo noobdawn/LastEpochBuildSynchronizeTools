@@ -10,20 +10,26 @@ from utils import *
 
 
 class ModifyCorruptionSubWindow(QWidget):
-    def __init__(self, parent):
+    def __init__(self, parent, callback):
         super().__init__()
         self.initUI()
         self.parent = parent
+        self.callback = callback
 
     def initUI(self):
         self.setWindowTitle("修改腐化")
+        self.comboBox = QComboBox()
+        self.comboBox.placeholderText = "请选择时间线"
+        for i in range(timeline_names.__len__()):
+            self.comboBox.addItem(timeline_names[i])
         self.label = QLabel("输入腐化值：")
         self.textEdit = QTextEdit()
-        self.textEdit.setPlaceholderText("输入腐化值，将会同时设定所有时间线的腐化：")
+        self.textEdit.setPlaceholderText("输入腐化值")
         self.textEdit.setFixedHeight(30)
         self.textButton = QPushButton("修改腐化")
         self.textButton.clicked.connect(self.modifyCorruption)
         layout = QVBoxLayout()
+        layout.addWidget(self.comboBox)
         layout.addWidget(self.label)
         layout.addWidget(self.textEdit)
         layout.addWidget(self.textButton)
@@ -33,12 +39,11 @@ class ModifyCorruptionSubWindow(QWidget):
         corruption = self.textEdit.toPlainText()
         # 如果是整数
         if corruption.isdigit():
-            self.parent.corruption = int(corruption)
-            QMessageBox.information(self, "提示", "已设定腐化值，仍需点击【修改存档】按钮才能生效！")
-            self.close()
+            selectedIdx = self.comboBox.currentIndex()
+            self.callback(int(corruption), selectedIdx)
+            QMessageBox.information(self, "提示", "修改成功")
         else:
             QMessageBox.information(self, "提示", "请输入正确的腐化值！")
-        self.close()
 
 
 class MyWindow(QWidget):
@@ -53,7 +58,6 @@ class MyWindow(QWidget):
             save_path = QFileDialog.getExistingDirectory(self, "选择存档路径")
             save_info(save_path)
         self.save_path = save_path
-        self.corruption = -1
 
     def initUI(self):
         self.setWindowTitle("最后纪元离线存档同步配装器BD工具 v1.3")
@@ -148,17 +152,31 @@ class MyWindow(QWidget):
         if len(bdStr) < 20 and isSyncBdOnly:
             QMessageBox.information(self, "提示", "请填写正确的bd")
             return
-        work(bdStr, savefile, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity, self.corruption)
+        work(bdStr, savefile, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity)
         QMessageBox.information(self, "提示", "修改成功")
         self.textEdit.clear()
-        self.corruption = -1
-
 
     def openCorruptionSubWindow(self):
-        self.corruptionSubWindow = ModifyCorruptionSubWindow(self)
+        # 获取下拉框选中的存档
+        selected = self.comboBox.currentText()
+        if selected == "":
+            QMessageBox.information(self, "提示", "请选择存档")
+            return
+        self.corruptionSubWindow = ModifyCorruptionSubWindow(self, self.modifyCorruption)
         self.corruptionSubWindow.show()
         self.corruptionSubWindow.move(self.frameGeometry().topLeft() + self.rect().center() - self.corruptionSubWindow.rect().center())
         
+
+    def modifyCorruption(self, corruption, selectedIdx):
+        # 获取下拉框选中的存档
+        selected = self.comboBox.currentText()
+        if selected == "":
+            QMessageBox.information(self, "提示", "请选择存档")
+            return
+        slot = selected.split(" - ")[1]
+        savefile = os.path.join(self.save_path, f"1CHARACTERSLOT_BETA_{slot}")
+        work_corruption(savefile, corruption, selectedIdx)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -1,6 +1,20 @@
 import json
 import os
 
+timeline_names = {
+    0 : "所有时间线",
+    1 : "流亡者的陨落（58）",
+    2 : "被盗的长矛（62）",
+    3 : "黑暗的太阳（66）",
+    4 : "鲜血、霜冻、死亡（70）",
+    5 : "终结风暴（75）",
+    6 : "帝国陨落（80）",
+    7 : "巨龙君临（85）",
+    8 : "最后废墟（90）",
+    9 : "寒冬纪元（90）",
+    10 : "烈焰魂灵（90）",
+}
+
 settings = {}
 
 
@@ -32,7 +46,7 @@ def save_info(save_path):
         f.write(json.dumps(settings, indent=4))
 
 
-def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity, corruption):
+def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity):
     data = None
     with open(saveFilePath, 'r', encoding='utf-8') as f:
         data = json.loads(f.read()[5:])
@@ -146,12 +160,34 @@ def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwri
             for i in range(len(data["monolithRuns"])):
                 data["monolithRuns"][i]["stability"] += 5000
 
+    with open(saveFilePath, 'w', encoding='utf-8') as f:
+        f.write('EPOCH' + json.dumps(data))
+
+
+def work_corruption(saveFilePath, corruption, selectedIdx):
+    data = None
+    with open(saveFilePath, 'r', encoding='utf-8') as f:
+        data = json.loads(f.read()[5:])
+    if data is None:
+        exit(1)
+
     if corruption >= 0:
-        if data.get("monolithRuns") is not None:
-            for i in range(len(data["monolithRuns"])):
-                if data["monolithRuns"][i].get("savedEchoWeb") is None:
-                    data["monolithRuns"][i]["savedEchoWeb"] = {}
-                data["monolithRuns"][i]["savedEchoWeb"]["corruption"] = corruption
+        if selectedIdx == 0:
+            if data.get("monolithRuns") is not None:
+                for i in range(len(data["monolithRuns"])):
+                    if data["monolithRuns"][i].get("savedEchoWeb") is None:
+                        data["monolithRuns"][i]["savedEchoWeb"] = {}
+                    data["monolithRuns"][i]["savedEchoWeb"]["corruption"] = corruption
+        else:
+            if data.get("monolithRuns") is not None:
+                i0 = (selectedIdx - 1) * 2
+                i1 = i0 + 1
+                if data["monolithRuns"][i0].get("savedEchoWeb") is None:
+                    data["monolithRuns"][i0]["savedEchoWeb"] = {}
+                data["monolithRuns"][i0]["savedEchoWeb"]["corruption"] = corruption
+                if data["monolithRuns"][i1].get("savedEchoWeb") is None:
+                    data["monolithRuns"][i1]["savedEchoWeb"] = {}
+                data["monolithRuns"][i1]["savedEchoWeb"]["corruption"] = corruption
 
     with open(saveFilePath, 'w', encoding='utf-8') as f:
         f.write('EPOCH' + json.dumps(data))
