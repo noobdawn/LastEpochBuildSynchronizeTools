@@ -46,7 +46,7 @@ def save_info(save_path):
         f.write(json.dumps(settings, indent=4))
 
 
-def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity):
+def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot):
     data = None
     with open(saveFilePath, 'r', encoding='utf-8') as f:
         data = json.loads(f.read()[5:])
@@ -145,24 +145,43 @@ def work(bdStr, saveFilePath, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwri
                 data["savedItems"].insert(equip_idx, equip)
                 idol_idx += 1
 
-    if isOverwriteStablity:
-        data["monolithRuns"] = []
-        for i in range(10):
-            for j in range(2):
-                data["monolithRuns"].append({
-                    "timelineID": i + 1,
-                    "difficultyIndex":j,
-                    "stability":5000,
-                })
-
-    if isAddStablity:
-        if data.get("monolithRuns") is not None:
-            for i in range(len(data["monolithRuns"])):
-                data["monolithRuns"][i]["stability"] += 5000
-
     with open(saveFilePath, 'w', encoding='utf-8') as f:
         f.write('EPOCH' + json.dumps(data))
 
+
+def work_stablity(saveFilePath, stablity, selectedIdx):
+    data = None
+    with open(saveFilePath, 'r', encoding='utf-8') as f:
+        data = json.loads(f.read()[5:])
+    if data is None:
+        exit(1)
+
+    if stablity >= 0:
+        if selectedIdx == 0:
+            if data.get("monolithRuns") is None:
+                data["monolithRuns"] = []
+            for i in range(10):
+                if i * 2 + 0 >= len(data["monolithRuns"]):
+                    data["monolithRuns"].append({"timelineID": i + 1, "difficultyIndex": 0, "depth": 0, "questCompletion": 0, "questBranch": 0, "bossLootDropped": False, "savedEchoWeb": {"version": 0, "corruption": 0, "echoesSinceLastDeath": 0, "gazeOfOrobyss": 0, "islands": []}})
+                else:
+                    data["monolithRuns"][i * 2 + 0]["stability"] = stablity
+                if i * 2 + 1 >= len(data["monolithRuns"]):
+                    data["monolithRuns"].append({"timelineID": i + 1, "difficultyIndex": 1, "depth": 0, "questCompletion": 0, "questBranch": 0, "bossLootDropped": False, "savedEchoWeb": {"version": 0, "corruption": 0, "echoesSinceLastDeath": 0, "gazeOfOrobyss": 0, "islands": []}})
+                else:
+                    data["monolithRuns"][i * 2 + 1]["stability"] = stablity
+        else:
+            if data.get("monolithRuns") is not None:
+                found = False
+                for i in range(len(data["monolithRuns"])):
+                    if data["monolithRuns"][i]["timelineID"] == selectedIdx:
+                        data["monolithRuns"][i]["stability"] = stablity
+                        found = True
+                if not found:
+                    data["monolithRuns"].append({"timelineID": selectedIdx, "difficultyIndex": 0, "depth": 0, "questCompletion": 0, "questBranch": 0, "bossLootDropped": False, "savedEchoWeb": {"version": 0, "corruption": 0, "echoesSinceLastDeath": 0, "gazeOfOrobyss": 0, "islands": []}})
+                    data["monolithRuns"].append({"timelineID": selectedIdx, "difficultyIndex": 1, "depth": 0, "questCompletion": 0, "questBranch": 0, "bossLootDropped": False, "savedEchoWeb": {"version": 0, "corruption": 0, "echoesSinceLastDeath": 0, "gazeOfOrobyss": 0, "islands": []}})
+
+    with open(saveFilePath, 'w', encoding='utf-8') as f:
+        f.write('EPOCH' + json.dumps(data))
 
 def work_corruption(saveFilePath, corruption, selectedIdx):
     data = None

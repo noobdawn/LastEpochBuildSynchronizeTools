@@ -9,25 +9,26 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QHBoxLayout, QPu
 from utils import *
 
 
-class ModifyCorruptionSubWindow(QWidget):
-    def __init__(self, parent, callback):
+class ModifySubWindow(QWidget):
+    def __init__(self, parent, callback, text="腐化"):
         super().__init__()
-        self.initUI()
         self.parent = parent
         self.callback = callback
+        self.text = text
+        self.initUI()
 
     def initUI(self):
-        self.setWindowTitle("修改腐化")
+        self.setWindowTitle("修改" + self.text)
         self.comboBox = QComboBox()
         self.comboBox.placeholderText = "请选择时间线"
         for i in range(timeline_names.__len__()):
             self.comboBox.addItem(timeline_names[i])
-        self.label = QLabel("输入腐化值：")
+        self.label = QLabel("输入：")
         self.textEdit = QTextEdit()
-        self.textEdit.setPlaceholderText("输入腐化值")
+        self.textEdit.setPlaceholderText("输入" + self.text + "值")
         self.textEdit.setFixedHeight(30)
-        self.textButton = QPushButton("修改腐化")
-        self.textButton.clicked.connect(self.modifyCorruption)
+        self.textButton = QPushButton("修改" + self.text)
+        self.textButton.clicked.connect(self.modify)
         layout = QVBoxLayout()
         layout.addWidget(self.comboBox)
         layout.addWidget(self.label)
@@ -35,7 +36,7 @@ class ModifyCorruptionSubWindow(QWidget):
         layout.addWidget(self.textButton)
         self.setLayout(layout)
 
-    def modifyCorruption(self):
+    def modify(self):
         corruption = self.textEdit.toPlainText()
         # 如果是整数
         if corruption.isdigit():
@@ -83,18 +84,15 @@ class MyWindow(QWidget):
         # 创建勾选框
         self.syncBdCheckBox = QCheckBox("同步BD")
         self.skipPlotCheckBox = QCheckBox("跳过剧情、解锁传送点、解锁地下城和竞技场难度、发现所有祝福")
-        self.syncBdCheckBox.setChecked(True)
-        self.addStablityCheckBox = QCheckBox("为时间线添加稳定性（鼠标停留查看说明）")
-        self.overwriteStablityCheckBox = QCheckBox("重置时间线（鼠标停留查看说明）")
-        self.addStablityCheckBox.setToolTip("添加稳定性：为现在所有打过的时间线增加5000稳定性；\n重置时间线：将所有时间线清空并设定为0腐化5000稳定性；\n在修改时间线时，如果你是新号，需要勾选【重置时间线】，如果你已经打过时间线，则千万不要勾选！！！")
-        self.overwriteStablityCheckBox.setToolTip("添加稳定性：为现在所有打过的时间线增加5000稳定性；\n重置时间线：将所有时间线清空并设定为0腐化5000稳定性；\n在修改时间线时，如果你是新号，需要勾选【重置时间线】，如果你已经打过时间线，则千万不要勾选！！！")
-        
+        self.syncBdCheckBox.setChecked(True)    
 
         # 创建按钮
         self.textButton = QPushButton("修改存档")
         self.textButton.clicked.connect(self.modifySaveFile)
         self.corruptionButton = QPushButton("设定腐化")
         self.corruptionButton.clicked.connect(self.openCorruptionSubWindow)
+        self.stablityButton = QPushButton("设定稳定值")
+        self.stablityButton.clicked.connect(self.openStablitySubWindow)
 
         # 创建超链接
         self.githubLink = QLabel("<a href=https://github.com/noobdawn/LastEpochBuildSynchronizeTools"">Github</a>")
@@ -109,12 +107,11 @@ class MyWindow(QWidget):
         layout.addWidget(self.textEdit)
         layout.addWidget(self.syncBdCheckBox)
         layout.addWidget(self.skipPlotCheckBox)
-        layout.addWidget(self.addStablityCheckBox)
-        layout.addWidget(self.overwriteStablityCheckBox)
 
         buttonHLayout = QHBoxLayout()
         buttonHLayout.addWidget(self.textButton)
         buttonHLayout.addWidget(self.corruptionButton)
+        buttonHLayout.addWidget(self.stablityButton)
         
         layout.addLayout(buttonHLayout)
         layout.addWidget(self.githubLink)
@@ -148,12 +145,10 @@ class MyWindow(QWidget):
         bdStr = self.textEdit.toPlainText()
         isSyncBdOnly = self.syncBdCheckBox.isChecked()
         isSkipPlot = self.skipPlotCheckBox.isChecked()
-        isAddStablity = self.addStablityCheckBox.isChecked()
-        isOverwriteStablity = self.overwriteStablityCheckBox.isChecked()
         if len(bdStr) < 20 and isSyncBdOnly:
             QMessageBox.information(self, "提示", "请填写正确的bd")
             return
-        work(bdStr, savefile, isSyncBdOnly, isSkipPlot, isAddStablity, isOverwriteStablity)
+        work(bdStr, savefile, isSyncBdOnly, isSkipPlot)
         QMessageBox.information(self, "提示", "修改成功")
         self.textEdit.clear()
 
@@ -163,10 +158,20 @@ class MyWindow(QWidget):
         if selected == "":
             QMessageBox.information(self, "提示", "请选择存档")
             return
-        self.corruptionSubWindow = ModifyCorruptionSubWindow(self, self.modifyCorruption)
-        self.corruptionSubWindow.show()
-        self.corruptionSubWindow.move(self.frameGeometry().topLeft() + self.rect().center() - self.corruptionSubWindow.rect().center())
-        
+        self.modifySubWindow = ModifySubWindow(self, self.modifyCorruption)
+        self.modifySubWindow.show()
+        self.modifySubWindow.move(self.frameGeometry().topLeft() + self.rect().center() - self.modifySubWindow.rect().center())
+
+    def openStablitySubWindow(self):
+        # 获取下拉框选中的存档
+        selected = self.comboBox.currentText()
+        if selected == "":
+            QMessageBox.information(self, "提示", "请选择存档")
+            return
+        self.modifySubWindow = ModifySubWindow(self, self.modifyStablity, "稳定性")
+        self.modifySubWindow.show()
+        self.modifySubWindow.move(self.frameGeometry().topLeft() + self.rect().center() - self.modifySubWindow.rect().center())
+
 
     def modifyCorruption(self, corruption, selectedIdx):
         # 获取下拉框选中的存档
@@ -177,6 +182,16 @@ class MyWindow(QWidget):
         slot = selected.split(" - ")[1]
         savefile = os.path.join(self.save_path, f"1CHARACTERSLOT_BETA_{slot}")
         work_corruption(savefile, corruption, selectedIdx)
+
+    def modifyStablity(self, stablity, selectedIdx):
+        # 获取下拉框选中的存档
+        selected = self.comboBox.currentText()
+        if selected == "":
+            QMessageBox.information(self, "提示", "请选择存档")
+            return
+        slot = selected.split(" - ")[1]
+        savefile = os.path.join(self.save_path, f"1CHARACTERSLOT_BETA_{slot}")
+        work_stablity(savefile, stablity, selectedIdx)
 
 
 if __name__ == "__main__":
