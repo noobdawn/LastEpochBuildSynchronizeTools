@@ -173,21 +173,38 @@ def work_corruption(saveFilePath, corruption, selectedIdx):
 
     if corruption >= 0:
         if selectedIdx == 0:
-            if data.get("monolithRuns") is not None:
-                for i in range(len(data["monolithRuns"])):
-                    if data["monolithRuns"][i].get("savedEchoWeb") is None:
-                        data["monolithRuns"][i]["savedEchoWeb"] = {}
-                    data["monolithRuns"][i]["savedEchoWeb"]["corruption"] = corruption
+            if data.get("monolithRuns") is None:
+                data["monolithRuns"] = []
+            for i in range(10):
+                if i * 2 + 0 >= len(data["monolithRuns"]):
+                    data["monolithRuns"].append({"timelineID": i + 1, "difficultyIndex": 0, "depth": 0, "questCompletion": 0, "questBranch": 0, "bossLootDropped": False, "savedEchoWeb": {"version": 0, "corruption": corruption, "echoesSinceLastDeath": 0, "gazeOfOrobyss": 0, "islands": []}})
+                else:
+                    data["monolithRuns"][i * 2 + 0]["savedEchoWeb"]["corruption"] = corruption
+                if i * 2 + 1 >= len(data["monolithRuns"]):
+                    data["monolithRuns"].append({"timelineID": i + 1, "difficultyIndex": 1, "depth": 0, "questCompletion": 0, "questBranch": 0, "bossLootDropped": False, "savedEchoWeb": {"version": 0, "corruption": corruption, "echoesSinceLastDeath": 0, "gazeOfOrobyss": 0, "islands": []}})
+                else:
+                    data["monolithRuns"][i * 2 + 1]["savedEchoWeb"]["corruption"] = corruption
+
         else:
             if data.get("monolithRuns") is not None:
-                i0 = (selectedIdx - 1) * 2
-                i1 = i0 + 1
-                if data["monolithRuns"][i0].get("savedEchoWeb") is None:
-                    data["monolithRuns"][i0]["savedEchoWeb"] = {}
-                data["monolithRuns"][i0]["savedEchoWeb"]["corruption"] = corruption
-                if data["monolithRuns"][i1].get("savedEchoWeb") is None:
-                    data["monolithRuns"][i1]["savedEchoWeb"] = {}
-                data["monolithRuns"][i1]["savedEchoWeb"]["corruption"] = corruption
+                found = False
+                for i in range(len(data["monolithRuns"])):
+                    if data["monolithRuns"][i]["timelineID"] == selectedIdx:
+                        if data["monolithRuns"][i].get("savedEchoWeb") is None:
+                            data["monolithRuns"][i]["savedEchoWeb"] = {
+                                "version": 0,
+                                "corruption": corruption,
+                                "echoesSinceLastDeath": 0,
+                                "gazeOfOrobyss": 0,
+                                "islands": []
+                            }
+                        else:
+                            data["monolithRuns"][i]["savedEchoWeb"]["corruption"] = corruption
+                        found = True
+                if not found:
+                    data["monolithRuns"].append({"timelineID": selectedIdx, "difficultyIndex": 0, "depth": 0, "questCompletion": 0, "questBranch": 0, "bossLootDropped": False, "savedEchoWeb": {"version": 0, "corruption": corruption, "echoesSinceLastDeath": 0, "gazeOfOrobyss": 0, "islands": []}})
+                    data["monolithRuns"].append({"timelineID": selectedIdx, "difficultyIndex": 1, "depth": 0, "questCompletion": 0, "questBranch": 0, "bossLootDropped": False, "savedEchoWeb": {"version": 0, "corruption": corruption, "echoesSinceLastDeath": 0, "gazeOfOrobyss": 0, "islands": []}})
+                    
 
     with open(saveFilePath, 'w', encoding='utf-8') as f:
         f.write('EPOCH' + json.dumps(data))

@@ -122,6 +122,7 @@ class MyWindow(QWidget):
         self.setLayout(layout)
 
     def refreshSaveFiles(self):
+        self.comboBox.clear()
         files = os.listdir(self.save_path)
         for file in files:
             if file.find("CHARACTERSLOT") != -1 and not file.endswith(".bak") and not file.endswith("_temp"):
