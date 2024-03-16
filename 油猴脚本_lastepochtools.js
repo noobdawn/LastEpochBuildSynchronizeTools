@@ -22,6 +22,9 @@
     // 将复制的按钮放到原始按钮的下方
     Logotext.parentNode.appendChild(exportButton);
 
+    // 移除Logotext.parentNode的href属性
+    Logotext.parentNode.parentNode.removeAttribute('href');
+
     // 添加点击事件
     exportButton.addEventListener('click', function() {
         const res = le_work(window.buildInfo.data);
