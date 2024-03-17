@@ -87,11 +87,10 @@
         $.each(d, function(e, f) {
             if (f) {
                 const g = {};
-                $.isPlainObject(f) ? (g.item = f.id && le_Zj(f.id),
-                g.Wa = f.ir) : (g.item = f && le_Zj(f),
+                $.isPlainObject(f) ? (g.item = f.id && le__j(f.id),
+                g.Wa = f.ir) : (g.item = f && le__j(f),
                 g.Wa = []);
-                le_ij("blessing", g, e);
-                output["blessing"][e] = g.item.subTypeId;
+                le_jj("blessing", g, e)
             }
         });
 
@@ -108,20 +107,20 @@
         $.each(a.idols, function(e, f) {
             e = f.x;
             const g = f.y
-            , k = {};
-            k.item = f.id && le_Zj(f.id);
-            var l = le_0j(f.affixes);
-            const n = l.vg;
+              , k = {};
+            k.item = f.id && le__j(f.id);
+            var l = le_1j(f.affixes);
+            const p = l.yg;
             l = l.suffixes;
-            n[0] && (k.O = n[0].data,
-            k.pa = n[0].mb,
-            k.tb = n[0].Sb);
+            p[0] && (k.O = p[0].data,
+            k.pa = p[0].lb,
+            k.sb = p[0].Rb);
             l[0] && (k.P = l[0].data,
-            k.qa = l[0].mb,
-            k.ub = l[0].Sb);
+            k.qa = l[0].lb,
+            k.tb = l[0].Rb);
             k.Wa = f.ir;
             k.Za = f.ur;
-            le_hj(k, e, g, !0)
+            le_ij(k, e, g, !0)
 
             // 神像处理
             output["idols"][idx] = {};
@@ -206,41 +205,41 @@
         });
         delete c.idol;
         delete c.blessing;
-        $db.is2hItem(c.weapon1 && c.weapon1.id && le_Yj(c.weapon1.id)) && delete c.weapon2;
+        $db.is2hItem(c.weapon1 && c.weapon1.id && le__j(c.weapon1.id)) && delete c.weapon2;
         $.each(c, function(e, f) {
             let g = {};
-            g.item = f.id && le_Zj(f.id);
-            var k = le_0j(f.affixes)
-            , l = k.vg;
-            const n = k.suffixes;
+            g.item = f.id && le__j(f.id);
+            var k = le_1j(f.affixes)
+            , l = k.yg;
+            const p = k.suffixes;
             k = null;
             l[0] && (g.O = l[0].data,
-            g.pa = l[0].mb,
-            g.tb = l[0].Sb,
+            g.pa = l[0].lb,
+            g.sb = l[0].Rb,
             g.O && 2 == g.O.specialAffixType && (k = g.O.id));
             l[1] && (g.X = l[1].data,
-            g.Da = l[1].mb,
-            g.Qc = l[1].Sb,
+            g.Da = l[1].lb,
+            g.Pc = l[1].Rb,
             g.X && 2 == g.X.specialAffixType && (k = g.X.id));
-            n[0] && (g.P = n[0].data,
-            g.qa = n[0].mb,
-            g.ub = n[0].Sb,
+            p[0] && (g.P = p[0].data,
+            g.qa = p[0].lb,
+            g.tb = p[0].Rb,
             g.P && 2 == g.P.specialAffixType && (k = g.P.id));
-            n[1] && (g.aa = n[1].data,
-            g.Ea = n[1].mb,
-            g.Xc = n[1].Sb,
+            p[1] && (g.aa = p[1].data,
+            g.Ea = p[1].lb,
+            g.Wc = p[1].Rb,
             g.aa && 2 == g.aa.specialAffixType && (k = g.aa.id));
-            f.sealedAffix && (l = le_1j(f.sealedAffix),
+            f.sealedAffix && (l = le_2j(f.sealedAffix),
             g.Y = l.data,
-            g.Ga = l.mb,
-            g.Sc = l.Sb,
+            g.Ga = l.lb,
+            g.Rc = l.Rb,
             g.Y && 2 == g.Y.specialAffixType && (k = g.Y.id));
             g.Wa = f.ir;
             g.Za = f.ur;
-            g.Cc = f.faction;
-            g.item && null != k && (f = $db.Rf(g.item.baseTypeId, g.item.subTypeId, k)) && (le_fj(f, g),
+            g.Bc = f.faction;
+            g.item && null != k && (f = $db.Rf(g.item.baseTypeId, g.item.subTypeId, k)) && (le_gj(f, g),
             g = f);
-            le_jj(e, g)
+            le_kj(e, g)
 
             if (g.item)
             {
