@@ -1,0 +1,10 @@
+hash.txt
+blacklist.txt
+calc_md5.py
+LICENSE
+README.md
+settings.inf
+.gitattributes
+.gitignore
+点我自动更新.exe
+update.py

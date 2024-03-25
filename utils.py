@@ -36,8 +36,9 @@ def load_info():
             f.write(json.dumps(settings, indent=4))
     else:
         with open("settings.inf", "r", encoding="utf-8") as f:
-            settings = json.loads(f.read())
-            print(f.read())
+            all_text = f.read()
+            all_text = all_text.replace("\\", "/")
+            settings = json.loads(all_text)
 
 def save_info(save_path):
     global settings
