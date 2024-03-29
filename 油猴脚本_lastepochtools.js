@@ -196,12 +196,11 @@
             output["idols"][idx]["inventoryPosition"] = {"x":x,"y":y};
             idx++;
         });
-        le_Xi();
 
         idx = 0;
         output["equipment"] = [];
         const c = a.equipment;
-        $.each(le_pi, function(e) {
+        $.each(le_si, function(e) {
             c[e] || (c[e] = {})
         });
         delete c.idol;
