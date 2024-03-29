@@ -196,6 +196,7 @@
             output["idols"][idx]["inventoryPosition"] = {"x":x,"y":y};
             idx++;
         });
+        le_Xi();
 
         idx = 0;
         output["equipment"] = [];
