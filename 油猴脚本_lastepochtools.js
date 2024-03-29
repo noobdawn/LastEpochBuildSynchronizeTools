@@ -87,10 +87,10 @@
         $.each(d, function(e, f) {
             if (f) {
                 const g = {};
-                $.isPlainObject(f) ? (g.item = f.id && le__j(f.id),
-                g.Wa = f.ir) : (g.item = f && le__j(f),
+                $.isPlainObject(f) ? (g.item = f.id && le_0j(f.id),
+                g.Wa = f.ir) : (g.item = f && le_0j(f),
                 g.Wa = []);
-                le_jj("blessing", g, e)
+                le_kj("blessing", g, e)
             }
         });
 
@@ -200,7 +200,7 @@
         idx = 0;
         output["equipment"] = [];
         const c = a.equipment;
-        $.each(le_pi, function(e) {
+        $.each(le_si, function(e) {
             c[e] || (c[e] = {})
         });
         delete c.idol;
@@ -218,7 +218,7 @@
                      g.sb = m[0].Rb,
                      g.O && 2 == g.O.specialAffixType && (k = g.O.id));
             m[1] && (g.X = m[1].data,
-                     g.Da = m[1].lb,
+                     g.Ea = m[1].lb,
                      g.Pc = m[1].Rb,
                      g.X && 2 == g.X.specialAffixType && (k = g.X.id));
             p[0] && (g.P = p[0].data,
@@ -226,12 +226,12 @@
                      g.tb = p[0].Rb,
                      g.P && 2 == g.P.specialAffixType && (k = g.P.id));
             p[1] && (g.aa = p[1].data,
-                     g.Ea = p[1].lb,
+                     g.Fa = p[1].lb,
                      g.Wc = p[1].Rb,
                      g.aa && 2 == g.aa.specialAffixType && (k = g.aa.id));
             f.sealedAffix && (m = le_3j(f.sealedAffix),
                               g.Y = m.data,
-                              g.Ga = m.lb,
+                              g.Ha = m.lb,
                               g.Rc = m.Rb,
                               g.Y && 2 == g.Y.specialAffixType && (k = g.Y.id));
             g.Wa = f.ir;
