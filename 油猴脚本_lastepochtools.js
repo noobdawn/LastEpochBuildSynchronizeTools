@@ -87,10 +87,10 @@
         $.each(d, function(e, f) {
             if (f) {
                 const g = {};
-                $.isPlainObject(f) ? (g.item = f.id && le__j(f.id),
-                g.Wa = f.ir) : (g.item = f && le__j(f),
+                $.isPlainObject(f) ? (g.item = f.id && le_0j(f.id),
+                g.Wa = f.ir) : (g.item = f && le_0j(f),
                 g.Wa = []);
-                le_jj("blessing", g, e)
+                le_kj("blessing", g, e)
             }
         });
 
