@@ -91,6 +91,8 @@
                 g.Wa = f.ir) : (g.item = f && le_0j(f),
                 g.Wa = []);
                 le_kj("blessing", g, e)
+
+                output["blessing"][e] = g.item.subTypeId;
             }
         });
 
