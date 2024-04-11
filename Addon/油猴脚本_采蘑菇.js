@@ -280,14 +280,24 @@
                     output["equipment"][idx]["data"][8] = (g.item.uniqueId - g.item.uniqueId % 256) / 256;
                     output["equipment"][idx]["data"][9] = g.item.uniqueId % 256;
                     // 固有属性Roll值
-                    output["equipment"][idx]["data"][10] = 255;
-                    output["equipment"][idx]["data"][11] = 255;
-                    output["equipment"][idx]["data"][12] = 255;
-                    output["equipment"][idx]["data"][13] = 255;
-                    output["equipment"][idx]["data"][14] = 255;
-                    output["equipment"][idx]["data"][15] = 255;
-                    output["equipment"][idx]["data"][16] = 255;
-                    output["equipment"][idx]["data"][17] = 255;
+                    for (let i = 0; i < 8; i++)
+                        output["equipment"][idx]["data"][10 + i] = 255;
+                    $.each(g.item.mods, function(e, f) {
+                        if (f.canRoll == 1 && f.value < 0 && f.maxValue < 0)
+                        {
+                            const rollId = f.rollId;
+                            output["equipment"][idx]["data"][10 + rollId] = 1;
+                        }
+                    });
+                    
+                    // output["equipment"][idx]["data"][10] = 255;
+                    // output["equipment"][idx]["data"][11] = 255;
+                    // output["equipment"][idx]["data"][12] = 255;
+                    // output["equipment"][idx]["data"][13] = 255;
+                    // output["equipment"][idx]["data"][14] = 255;
+                    // output["equipment"][idx]["data"][15] = 255;
+                    // output["equipment"][idx]["data"][16] = 255;
+                    // output["equipment"][idx]["data"][17] = 255;
                     // 传奇潜能数
                     output["equipment"][idx]["data"][18] = f.affixes.length;
                     affix_start = 19;
