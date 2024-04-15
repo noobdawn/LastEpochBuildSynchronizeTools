@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         最后纪元配装器数据导出-caimogu
 // @namespace    http://tampermonkey.net/
-// @version      2024-03-03
+// @version      2024-04-15
 // @description  try to take over the world!
 // @author       You
 // @match        https://lastepoch.caimogu.cc/planner.html?id=*
@@ -12,6 +12,11 @@
 
 (function() {
     'use strict';
+
+    const DEBUFF_NAMES = [
+        "爆炸箭魔力消耗",
+        "直接施放法术时失去的当前生命值和护盾",
+    ]
 
     // 找到<div class="logo-text">最后纪元BD配装器</div>
     const Logotext = document.querySelector('.logo-text');
@@ -74,6 +79,18 @@
             case "idol":
                 return 29;
         }
+    }
+
+    function isDebuffMod(mod) {
+        const prop_name = $db.getTaggedPropertyString(mod.property, mod.tags, mod.specialTag).trim();
+        console.log(prop_name);
+        let found = false;
+        $.each(DEBUFF_NAMES, function(e, f) {
+            // 判定是否为debuff
+            if (f === prop_name)
+                found = true;
+        });
+        return found;
     }
     
     function le_work(a){
@@ -283,21 +300,12 @@
                     for (let i = 0; i < 8; i++)
                         output["equipment"][idx]["data"][10 + i] = 255;
                     $.each(g.item.mods, function(e, f) {
-                        if (f.canRoll == 1 && f.value < 0 && f.maxValue < 0)
+                        if (f.canRoll == 1 && isDebuffMod(f))
                         {
                             const rollId = f.rollId;
                             output["equipment"][idx]["data"][10 + rollId] = 1;
                         }
                     });
-                    
-                    // output["equipment"][idx]["data"][10] = 255;
-                    // output["equipment"][idx]["data"][11] = 255;
-                    // output["equipment"][idx]["data"][12] = 255;
-                    // output["equipment"][idx]["data"][13] = 255;
-                    // output["equipment"][idx]["data"][14] = 255;
-                    // output["equipment"][idx]["data"][15] = 255;
-                    // output["equipment"][idx]["data"][16] = 255;
-                    // output["equipment"][idx]["data"][17] = 255;
                     // 传奇潜能数
                     output["equipment"][idx]["data"][18] = f.affixes.length;
                     affix_start = 19;
