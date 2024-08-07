@@ -104,12 +104,10 @@
         $.each(d, function(e, f) {
             if (f) {
                 const g = {};
-                $.isPlainObject(f) ? (g.item = f.id && le_0j(f.id),
-                g.Wa = f.ir) : (g.item = f && le_0j(f),
-                g.Wa = []);
-                le_kj("blessing", g, e)
-
-                output["blessing"][e] = g.item.subTypeId;
+                $.isPlainObject(f) ? (g.item = f.id && le__j(f.id),
+                g.Xa = f.ir) : (g.item = f && le__j(f),
+                g.Xa = []);
+                le_jj("blessing", g, e)
             }
         });
 
@@ -126,20 +124,20 @@
         $.each(a.idols, function(e, f) {
             e = f.x;
             const g = f.y
-            , k = {};
-            k.item = f.id && le_0j(f.id);
-            var m = le_2j(f.affixes);
-            const p = m.zg;
+              , k = {};
+            k.item = f.id && le__j(f.id);
+            var m = le_1j(f.affixes);
+            const p = m.xg;
             m = m.suffixes;
-            p[0] && (k.O = p[0].data,
-                     k.pa = p[0].lb,
-                     k.sb = p[0].Rb);
-            m[0] && (k.P = m[0].data,
-                     k.qa = m[0].lb,
-                     k.tb = m[0].Rb);
-            k.Wa = f.ir;
+            p[0] && (k.M = p[0].data,
+            k.na = p[0].ib,
+            k.pb = p[0].Ob);
+            m[0] && (k.N = m[0].data,
+            k.oa = m[0].ib,
+            k.qb = m[0].Ob);
+            k.Xa = f.ir;
             k.Za = f.ur;
-            le_jj(k, e, g, !0)
+            le_ij(k, e, g, !0)
 
             // 神像处理
             output["idols"][idx] = {};
@@ -171,19 +169,19 @@
             else{
                 output["idols"][idx]["data"][8] = 20;
                 var affix_count = 0;
-                if (k.O)
+                if (k.M)
                     affix_count++;
-                if (k.P)
+                if (k.N)
                     affix_count++;
                 output["idols"][idx]["data"][9] = affix_count;
-                if (k.O) {
-                    output["idols"][idx]["data"][10] = 96 + (k.O.affixId - k.O.affixId % 256) / 256;
-                    output["idols"][idx]["data"][11] = k.O.affixId % 256;
+                if (k.M) {
+                    output["idols"][idx]["data"][10] = 96 + (k.M.affixId - k.M.affixId % 256) / 256;
+                    output["idols"][idx]["data"][11] = k.M.affixId % 256;
                     output["idols"][idx]["data"][12] = 255;
                 }
-                if (k.P) {
-                    output["idols"][idx]["data"][13] = 96 + (k.P.affixId - k.P.affixId % 256) / 256;
-                    output["idols"][idx]["data"][14] = k.P.affixId % 256;
+                if (k.N) {
+                    output["idols"][idx]["data"][13] = 96 + (k.N.affixId - k.N.affixId % 256) / 256;
+                    output["idols"][idx]["data"][14] = k.N.affixId % 256;
                     output["idols"][idx]["data"][15] = 255;
                 }
                 output["idols"][idx]["data"][16] = 0;
@@ -219,46 +217,46 @@
         idx = 0;
         output["equipment"] = [];
         const c = a.equipment;
-        $.each(le_si, function(e) {
+        $.each(le_ti, function(e) {
             c[e] || (c[e] = {})
         });
         delete c.idol;
         delete c.blessing;
-        $db.is2hItem(c.weapon1 && c.weapon1.id && le_0j(c.weapon1.id)) && delete c.weapon2;
+        $db.is2hItem(c.weapon1 && c.weapon1.id && le__j(c.weapon1.id)) && delete c.weapon2;
         $.each(c, function(e, f) {
             let g = {};
-            g.item = f.id && le_0j(f.id);
-            var k = le_2j(f.affixes)
-            , m = k.zg;
+            g.item = f.id && le__j(f.id);
+            var k = le_1j(f.affixes)
+            , m = k.xg;
             const p = k.suffixes;
             k = null;
-            m[0] && (g.O = m[0].data,
-                     g.pa = m[0].lb,
-                     g.sb = m[0].Rb,
-                     g.O && 2 == g.O.specialAffixType && (k = g.O.id));
-            m[1] && (g.X = m[1].data,
-                     g.Ea = m[1].lb,
-                     g.Pc = m[1].Rb,
-                     g.X && 2 == g.X.specialAffixType && (k = g.X.id));
-            p[0] && (g.P = p[0].data,
-                     g.qa = p[0].lb,
-                     g.tb = p[0].Rb,
-                     g.P && 2 == g.P.specialAffixType && (k = g.P.id));
-            p[1] && (g.aa = p[1].data,
-                     g.Fa = p[1].lb,
-                     g.Wc = p[1].Rb,
-                     g.aa && 2 == g.aa.specialAffixType && (k = g.aa.id));
-            f.sealedAffix && (m = le_3j(f.sealedAffix),
-                              g.Y = m.data,
-                              g.Ha = m.lb,
-                              g.Rc = m.Rb,
-                              g.Y && 2 == g.Y.specialAffixType && (k = g.Y.id));
-            g.Wa = f.ir;
+            m[0] && (g.M = m[0].data,
+            g.na = m[0].ib,
+            g.pb = m[0].Ob,
+            g.M && 2 == g.M.specialAffixType && (k = g.M.id));
+            m[1] && (g.W = m[1].data,
+            g.Ca = m[1].ib,
+            g.Mc = m[1].Ob,
+            g.W && 2 == g.W.specialAffixType && (k = g.W.id));
+            p[0] && (g.N = p[0].data,
+            g.oa = p[0].ib,
+            g.qb = p[0].Ob,
+            g.N && 2 == g.N.specialAffixType && (k = g.N.id));
+            p[1] && (g.Z = p[1].data,
+            g.Da = p[1].ib,
+            g.Tc = p[1].Ob,
+            g.Z && 2 == g.Z.specialAffixType && (k = g.Z.id));
+            f.sealedAffix && (m = le_2j(f.sealedAffix),
+            g.X = m.data,
+            g.Fa = m.ib,
+            g.Oc = m.Ob,
+            g.X && 2 == g.X.specialAffixType && (k = g.X.id));
+            g.Xa = f.ir;
             g.Za = f.ur;
-            g.Bc = f.faction;
-            g.item && null != k && (f = $db.Sf(g.item.baseTypeId, g.item.subTypeId, k)) && (le_hj(f, g),
-                                                                                            g = f);
-            le_lj(e, g)
+            g.xc = f.faction;
+            g.item && null != k && (f = $db.Of(g.item.baseTypeId, g.item.subTypeId, k)) && (le_gj(f, g),
+            g = f);
+            le_kj(e, g)
 
             if (g.item)
             {
@@ -326,35 +324,35 @@
                     output["equipment"][idx]["data"][9] = affixes_count;
                     if (isSealed)
                     {
-                        output["equipment"][idx]["data"][10] = get_value_from_tier(f.sealedAffix.tier) + (g.Y.affixId - g.Y.affixId % 256) / 256;
-                        output["equipment"][idx]["data"][11] = g.Y.affixId % 256;
+                        output["equipment"][idx]["data"][10] = get_value_from_tier(f.sealedAffix.tier) + (g.X.affixId - g.X.affixId % 256) / 256;
+                        output["equipment"][idx]["data"][11] = g.X.affixId % 256;
                         output["equipment"][idx]["data"][12] = 255;
                         affix_start = 13;
                     }
                     else
                         affix_start = 10;
                 }
-                if (g.O){
-                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.O.affixId - g.O.affixId % 256) / 256;
-                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.O.affixId % 256;
+                if (g.M){
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.M.affixId - g.M.affixId % 256) / 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.M.affixId % 256;
                     output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
                     affix_id++;
                 }
-                if (g.X) {
-                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.X.affixId - g.X.affixId % 256) / 256;
-                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.X.affixId % 256;
+                if (g.W) {
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.W.affixId - g.W.affixId % 256) / 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.W.affixId % 256;
                     output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
                     affix_id++;
                 }
-                if (g.P) {
-                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.P.affixId - g.P.affixId % 256) / 256;
-                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.P.affixId % 256;
+                if (g.N) {
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.N.affixId - g.N.affixId % 256) / 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.N.affixId % 256;
                     output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
                     affix_id++;
                 }
-                if (g.aa) {
-                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.aa.affixId - g.aa.affixId % 256) / 256;
-                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.aa.affixId % 256;
+                if (g.Z) {
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3] = get_value_from_tier(parseInt(f.affixes[affix_id].tier)) + (g.Z.affixId - g.Z.affixId % 256) / 256;
+                    output["equipment"][idx]["data"][affix_start + affix_id * 3 + 1] = g.Z.affixId % 256;
                     output["equipment"][idx]["data"][affix_start + affix_id * 3 + 2] = 255;
                     affix_id++;
                 }

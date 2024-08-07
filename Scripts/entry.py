@@ -63,7 +63,7 @@ class MyWindow(QWidget):
     def initUI(self):
         self.setWindowTitle("最后纪元离线存档同步配装器BD工具 v1.3")
         # 创建用于说明的文本
-        self.label = QLabel("使用说明：\n1. 保证《最后纪元》停留在主界面，不要进入游戏，也不要停留在人物选择界面。\n2. 使用配套的油猴插件打开采蘑菇的配装器，点击“复制BD数据到剪贴板”\n3. 选择存档，并粘贴BD数据到下面的输入框中\n4. 点击“修改存档”按钮\n5. 此时方可进入人物选择界面开始游戏\n\n注意：修改存档有风险，背包物品会被覆盖，使用前请存好道具、备份存档。\n跨职业修改存档时，下方技能槽可能需要手动回复。")
+        self.label = QLabel("使用说明：\n1. 保证《最后纪元》停留在主界面，不要进入游戏，也不要停留在人物选择界面。\n2. 使用配套的油猴插件打开采蘑菇的配装器，点击“复制BD数据到剪贴板”\n3. 选择存档，并粘贴BD数据到下面的输入框中\n4. 点击“修改存档”按钮\n5. 此时方可进入人物选择界面开始游戏\n\n注意：修改存档有风险，背包物品会被覆盖，使用前请存好道具、备份存档。\n跨职业修改存档时，下方技能槽可能需要手动回复。\n如天赋树未同步，需手动点几下天赋点，退出游戏再同步一次即可。")
 
         # 创建按钮
         self.openSaveButton = QPushButton("打开存档位置（手动备份用）")
@@ -96,7 +96,7 @@ class MyWindow(QWidget):
 
         # 创建超链接
         self.githubLink = QLabel("<a href=https://github.com/noobdawn/LastEpochBuildSynchronizeTools"">Github</a>")
-        self.qqgroup = QLabel("问题反馈：QQ群650473806")
+        self.qqgroup = QLabel("<a href=https://www.bilibili.com/video/BV1ox4y1r7ti"">视频评论区反馈</a>")
 
         # 设置布局
         layout = QVBoxLayout()
@@ -123,10 +123,10 @@ class MyWindow(QWidget):
         files = os.listdir(self.save_path)
         for file in files:
             if file.find("CHARACTERSLOT") != -1 and not file.endswith(".bak") and not file.endswith("_temp"):
+                slot = file.split("_")[2]
                 with open(os.path.join(self.save_path, file), "r") as f:
                     savedata = json.loads(f.read()[5:])
                     charname = savedata["characterName"]
-                    slot = savedata["slot"]
                     self.comboBox.addItem(f"{charname} - {slot}")
 
     def openSaveFile(self):
