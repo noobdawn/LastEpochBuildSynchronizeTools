@@ -1,0 +1,1979 @@
+{
+  "schemaVersion": 2,
+  "artifactType": "research-example",
+  "description": "公开 LET Build 的显式过滤需求样例；不是运行时分析器输出契约，也不是已验证可直接导入的过滤器。",
+  "source": {
+    "fixture": "tests/fixtures/planner-om6w3Ypq.json",
+    "fixtureSha256": "411963d0e323db3ccc1e89d3b2fc962d0ebe72095d4e290ff363b2523c00c81b",
+    "buildId": "om6w3Ypq",
+    "url": "https://www.lastepochtools.com/planner/om6w3Ypq",
+    "dataVersion": "Version 1.5.0",
+    "catalog": {
+      "path": "web/src/core/game-item-data.json",
+      "gameVersion": "1.5.2.1",
+      "internalVersion": "1.5.2.2",
+      "buildHash": "8dfd6929fe2d10f2e77b7ed4c8e6910f49b2736b"
+    },
+    "extractedOn": "2026-10-16",
+    "availabilityCatalog": {
+      "path": ".local/research/game-data/MasterItemsList.json",
+      "gameBuildHash": "8dfd6929fe2d10f2e77b7ed4c8e6910f49b2736b"
+    }
+  },
+  "character": {
+    "level": 100,
+    "characterClass": 3,
+    "chosenMastery": 1
+  },
+  "semantics": {
+    "nullRollOrPotential": "源 Build 未指定；不隐含满值、零值或必须过滤此参数。",
+    "affixRole": "role 表示目标用途的研究分类。legendary_donor_candidate 需继续通过本版本制作规则和过滤器能力检查，不能等同直接制作成功。",
+    "specialItemRoute": "Primordial 等特殊物品的附加词缀在本样例中仅作为明确目标保留，其获取路线需另行验证。",
+    "positions": "神像 x/y 保留源 Build 坐标，仅说明目标排布；不用于匹配地面物品。",
+    "implicitAndUniqueMods": "本样例的词缀只来自 Build 明确列出的 affixes/sealedAffix/corruptedAffix；没有将底材隐含属性或独特物品固定属性混入普通词缀需求。",
+    "counts": "uniqueIdEncodedInstances 含套装和其他 U 前缀类别；nonSetUniqueInstances 排除套装。",
+    "scope": "未推导替代词缀、制作概率、掉落概率或经济价值；未读取任何私人存档。",
+    "corruptionFlags": "sourceCorruptedFlag/sourceRuinedFlag 等只保留 Build 明确提供的值，缺失为 null。catalogCorruptedSubtype 仅为底材字段。effectiveCorruptionState 尚未按特殊机制归纳，保持 null；不能把源字段省略或底材标志为 false 当成游戏有效状态已确认。",
+    "weaverFlags": "isWeaversWillUnique 只表示 Unique.legendaryType=1，普通神像不适用时为 null。idolWeaver 表示此公开样例的神像目标包含 specialAffixType=5 的 Weaver 词缀，不与 Weaver's Will 或 Heretical/Weaver's Touch 混用。",
+    "baseAvailability": "canDrop=null 表示原始底材对象无此字段；canDropByNegatingCannotDropFlag 仅为 cannotDrop 的机械反值。不能据 cannotDrop=1 断言没有特殊掉落、奖励或加工来源。",
+    "idolWeaverAcquisition": "本次核对确认 Weaver 神像是独立可获得类别，并可重铸已有 Weaver 神像；未确认普通神像到 Weaver 神像的转换。数据保留正常组合匹配和特殊路线未知状态，不会因普通底材标志而移除目标。"
+  },
+  "counts": {
+    "equipmentRecords": 12,
+    "equipmentAffixInstances": 21,
+    "equipmentDistinctAffixes": 13,
+    "uniqueIdEncodedInstances": 10,
+    "distinctUniqueIds": 9,
+    "nonSetUniqueInstances": 9,
+    "distinctNonSetUniqueIds": 8,
+    "idolRecords": 11,
+    "idolAffixInstances": 22,
+    "idolDistinctAffixes": 8,
+    "idolCombinations": 4
+  },
+  "equipment": [
+    {
+      "sourcePath": "data.equipment.head",
+      "slot": "head",
+      "id": "UAwRgrALA7CQ",
+      "baseTypeId": 0,
+      "subTypeId": 15,
+      "uniqueId": 471,
+      "name": "Unbroken Legion",
+      "baseTypeName": "Helmet",
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.head.affixes[0]",
+          "id": "ACwBgHEA",
+          "affixId": 408,
+          "name": "Shared Physical Penetration With Bleed",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            0,
+            1
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 8,
+        "levelRequirement": 66,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.amulet",
+      "slot": "amulet",
+      "id": "UAzDsGZQFiA",
+      "baseTypeId": 20,
+      "subTypeId": 7,
+      "uniqueId": 374,
+      "name": "Pearls of the Swine",
+      "baseTypeName": "Amulet",
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.amulet.affixes[0]",
+          "id": "AJwFgrEA",
+          "affixId": 945,
+          "name": "Minion Area and Damage",
+          "tier": 6,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            20,
+            4
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 58,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.chest",
+      "slot": "chest",
+      "id": "UAzCMIDiA",
+      "baseTypeId": 1,
+      "subTypeId": 1,
+      "uniqueId": 8,
+      "name": "Doublet of Onos Tull",
+      "baseTypeName": "Body Armor",
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.chest.affixes[0]",
+          "id": "AKwBmQ",
+          "affixId": 505,
+          "name": "Vitality",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.chest.affixes[1]",
+          "id": "ACwBgbEA",
+          "affixId": 406,
+          "name": "Shared Bleed Chance On Hit",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            1,
+            0
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.chest.affixes[2]",
+          "id": "AAwVgTEA",
+          "affixId": 52,
+          "name": "Increased Health",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            1,
+            0,
+            2
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 1,
+        "canDropByNegatingCannotDropFlag": false,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 5,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.weapon1",
+      "slot": "weapon1",
+      "id": "UAzDMwdgTiA",
+      "baseTypeId": 7,
+      "subTypeId": 3,
+      "uniqueId": 79,
+      "name": "Apiarist's Comb",
+      "baseTypeName": "One-Handed Mace",
+      "kind": "set",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": true,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 29,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.weapon2",
+      "slot": "weapon2",
+      "id": "UAwRgzALBDsQ",
+      "baseTypeId": 19,
+      "subTypeId": 13,
+      "uniqueId": 447,
+      "name": "Bones of the Ancestral Pack",
+      "baseTypeName": "Off-Hand Catalyst",
+      "kind": "primordial",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": true,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.weapon2.affixes[0]",
+          "id": "AAwJgbEA",
+          "affixId": 26,
+          "name": "Increased Minion Damage",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "special_item_affix_target_requires_route_validation",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            17,
+            19,
+            20,
+            21,
+            22,
+            4,
+            2
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 1,
+        "canDropByNegatingCannotDropFlag": false,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 62,
+        "uniqueCanDropRandomly": false,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.waist",
+      "slot": "waist",
+      "id": "IIwBhCY0sg",
+      "baseTypeId": 2,
+      "subTypeId": 2,
+      "name": "Plated Belt",
+      "baseTypeName": "Belt",
+      "kind": "ordinary_equipment",
+      "flags": {
+        "hasUniqueIdentity": false,
+        "isSetFromUniqueCatalog": null,
+        "isWeaversWillUnique": null,
+        "isPrimordialUnique": null,
+        "isCocoonedUnique": null,
+        "isPreCorruptedUnique": null,
+        "hasSpecificLegendaryAffixesFromCatalog": null,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.waist.affixes[0]",
+          "id": "AAwdgzEA",
+          "affixId": 73,
+          "name": "Minion Health Regen",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "equipment_crafting_target",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            0,
+            2,
+            22
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.waist.affixes[1]",
+          "id": "AAwJgbEA",
+          "affixId": 26,
+          "name": "Increased Minion Damage",
+          "tier": 6,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "equipment_crafting_target",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            17,
+            19,
+            20,
+            21,
+            22,
+            4,
+            2
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.waist.affixes[2]",
+          "id": "AAwJhQ",
+          "affixId": 22,
+          "name": "Health Regeneration",
+          "tier": 6,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "equipment_crafting_target",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            0,
+            1,
+            2,
+            21,
+            22
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.waist.affixes[3]",
+          "id": "AAwZgbEA",
+          "affixId": 36,
+          "name": "Hybrid Health",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "equipment_crafting_target",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            4,
+            3,
+            2
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 19,
+        "uniqueCanDropRandomly": null,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.ring1",
+      "slot": "ring1",
+      "id": "UAzDswNgo",
+      "baseTypeId": 21,
+      "subTypeId": 7,
+      "uniqueId": 66,
+      "name": "Hollow Finger",
+      "baseTypeName": "Ring",
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.ring1.affixes[0]",
+          "id": "AKwBgTEA",
+          "affixId": 502,
+          "name": "Intelligence",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            0,
+            1,
+            3,
+            21,
+            4,
+            22
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.ring1.affixes[1]",
+          "id": "ABwJgrEA",
+          "affixId": 825,
+          "name": "Added Health and Added Health Regeneration",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            21,
+            22
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 31,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.ring2",
+      "slot": "ring2",
+      "id": "UAzDswNgo",
+      "baseTypeId": 21,
+      "subTypeId": 7,
+      "uniqueId": 66,
+      "name": "Hollow Finger",
+      "baseTypeName": "Ring",
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.ring2.affixes[0]",
+          "id": "ABwJgrEA",
+          "affixId": 825,
+          "name": "Added Health and Added Health Regeneration",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            21,
+            22
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 31,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.feet",
+      "slot": "feet",
+      "id": "UAzBMoVgZiA",
+      "baseTypeId": 3,
+      "subTypeId": 2,
+      "uniqueId": 253,
+      "name": "Foot of the Mountain",
+      "baseTypeName": "Boots",
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.feet.affixes[0]",
+          "id": "AKwBmQ",
+          "affixId": 505,
+          "name": "Vitality",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.feet.affixes[1]",
+          "id": "AGwdgnEA",
+          "affixId": 679,
+          "name": "Experimental Minions Transported with Traversal Skills",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 1,
+            "name": "experimental"
+          },
+          "canRollOn": [
+            3
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 16,
+        "uniqueCanDropRandomly": false,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.hands",
+      "slot": "hands",
+      "id": "UAzCcGZwJiA",
+      "baseTypeId": 4,
+      "subTypeId": 9,
+      "uniqueId": 332,
+      "name": "Blood Roost",
+      "baseTypeName": "Gloves",
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.hands.affixes[0]",
+          "id": "AJwFgrEA",
+          "affixId": 945,
+          "name": "Minion Area and Damage",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            20,
+            4
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.hands.affixes[1]",
+          "id": "AAwZgbEA",
+          "affixId": 36,
+          "name": "Hybrid Health",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "legendary_donor_candidate",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            4,
+            3,
+            2
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 1,
+        "canDropByNegatingCannotDropFlag": false,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 62,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.relic",
+      "slot": "relic",
+      "id": "UAwRgTAzMxA",
+      "baseTypeId": 22,
+      "subTypeId": 12,
+      "uniqueId": 300,
+      "name": "Ambitions of an Erased Acolyte",
+      "baseTypeName": "Relic",
+      "kind": "weaver",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": true,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.relic.affixes[0]",
+          "id": "AKwBgTEA",
+          "affixId": 502,
+          "name": "Intelligence",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "weaver_outcome_target",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            0,
+            1,
+            3,
+            21,
+            4,
+            22
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.relic.affixes[1]",
+          "id": "ABwJgrEA",
+          "affixId": 825,
+          "name": "Added Health and Added Health Regeneration",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "weaver_outcome_target",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            21,
+            22
+          ]
+        },
+        {
+          "sourcePath": "data.equipment.relic.affixes[2]",
+          "id": "AAwJhQ",
+          "affixId": 22,
+          "name": "Health Regeneration",
+          "tier": 5,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "weaver_outcome_target",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            0,
+            1,
+            2,
+            21,
+            22
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 8,
+        "levelRequirement": 5,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "sourcePath": "data.equipment.idol_altar",
+      "slot": "idol_altar",
+      "id": "IIwBgLKIMwrQ",
+      "baseTypeId": 41,
+      "subTypeId": 3,
+      "name": "Spire Altar",
+      "baseTypeName": "Idol Altar",
+      "kind": "idol_altar",
+      "flags": {
+        "hasUniqueIdentity": false,
+        "isSetFromUniqueCatalog": null,
+        "isWeaversWillUnique": null,
+        "isPrimordialUnique": null,
+        "isCocoonedUnique": null,
+        "isPreCorruptedUnique": null,
+        "hasSpecificLegendaryAffixesFromCatalog": null,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "affixes": [
+        {
+          "sourcePath": "data.equipment.idol_altar.affixes[0]",
+          "id": "AIwBgnAzEA",
+          "affixId": 1093,
+          "name": "Increased Effect of Idols within Refracted Slots",
+          "tier": 7,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "altar_crafting_target",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            41
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 0,
+        "uniqueCanDropRandomly": null,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    }
+  ],
+  "specialItemTargets": [
+    {
+      "uniqueId": 471,
+      "id": "UAwRgrALA7CQ",
+      "name": "Unbroken Legion",
+      "baseTypeId": 0,
+      "subTypeId": 15,
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 1,
+      "slots": [
+        "head"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 8,
+        "levelRequirement": 66,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "uniqueId": 374,
+      "id": "UAzDsGZQFiA",
+      "name": "Pearls of the Swine",
+      "baseTypeId": 20,
+      "subTypeId": 7,
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 1,
+      "slots": [
+        "amulet"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 58,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "uniqueId": 8,
+      "id": "UAzCMIDiA",
+      "name": "Doublet of Onos Tull",
+      "baseTypeId": 1,
+      "subTypeId": 1,
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 1,
+      "slots": [
+        "chest"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 1,
+        "canDropByNegatingCannotDropFlag": false,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 5,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "uniqueId": 79,
+      "id": "UAzDMwdgTiA",
+      "name": "Apiarist's Comb",
+      "baseTypeId": 7,
+      "subTypeId": 3,
+      "kind": "set",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": true,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 1,
+      "slots": [
+        "weapon1"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 29,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "uniqueId": 447,
+      "id": "UAwRgzALBDsQ",
+      "name": "Bones of the Ancestral Pack",
+      "baseTypeId": 19,
+      "subTypeId": 13,
+      "kind": "primordial",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": true,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 1,
+      "slots": [
+        "weapon2"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 1,
+        "canDropByNegatingCannotDropFlag": false,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 62,
+        "uniqueCanDropRandomly": false,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "uniqueId": 66,
+      "id": "UAzDswNgo",
+      "name": "Hollow Finger",
+      "baseTypeId": 21,
+      "subTypeId": 7,
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 2,
+      "slots": [
+        "ring1",
+        "ring2"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 31,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "uniqueId": 253,
+      "id": "UAzBMoVgZiA",
+      "name": "Foot of the Mountain",
+      "baseTypeId": 3,
+      "subTypeId": 2,
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 1,
+      "slots": [
+        "feet"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 16,
+        "uniqueCanDropRandomly": false,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "uniqueId": 332,
+      "id": "UAzCcGZwJiA",
+      "name": "Blood Roost",
+      "baseTypeId": 4,
+      "subTypeId": 9,
+      "kind": "unique",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": false,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 1,
+      "slots": [
+        "hands"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 1,
+        "canDropByNegatingCannotDropFlag": false,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 62,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    },
+    {
+      "uniqueId": 300,
+      "id": "UAwRgTAzMxA",
+      "name": "Ambitions of an Erased Acolyte",
+      "baseTypeId": 22,
+      "subTypeId": 12,
+      "kind": "weaver",
+      "flags": {
+        "hasUniqueIdentity": true,
+        "isSetFromUniqueCatalog": false,
+        "isWeaversWillUnique": true,
+        "isPrimordialUnique": false,
+        "isCocoonedUnique": false,
+        "isPreCorruptedUnique": false,
+        "hasSpecificLegendaryAffixesFromCatalog": false,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "count": 1,
+      "slots": [
+        "relic"
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 8,
+        "levelRequirement": 5,
+        "uniqueCanDropRandomly": true,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      }
+    }
+  ],
+  "idolCombinations": [
+    {
+      "id": "IIwBgzCLBlA",
+      "baseTypeId": 30,
+      "subTypeId": 13,
+      "name": "Large Spectral Omen Idol",
+      "kind": "idol",
+      "flags": {
+        "hasUniqueIdentity": false,
+        "isSetFromUniqueCatalog": null,
+        "isWeaversWillUnique": null,
+        "isPrimordialUnique": null,
+        "isCocoonedUnique": null,
+        "isPreCorruptedUnique": null,
+        "hasSpecificLegendaryAffixesFromCatalog": null,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "size": {
+        "width": 1,
+        "height": 3
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "count": 1,
+      "sourceIndexes": [
+        0
+      ],
+      "positions": [
+        {
+          "x": 1,
+          "y": 1
+        }
+      ],
+      "affixes": [
+        {
+          "id": "AJwFgjEA",
+          "affixId": 941,
+          "name": "Ward Per Second and Increased Health",
+          "tier": 1,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "idol_combination_target",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            30
+          ]
+        },
+        {
+          "id": "AEwDg7EA",
+          "affixId": 287,
+          "name": "Minion Chance To Apply Mark For Death On Hit",
+          "tier": 1,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "idol_combination_target",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            30,
+            32,
+            33
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 1,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 8,
+        "levelRequirement": 0,
+        "uniqueCanDropRandomly": null,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      },
+      "acquisition": {
+        "category": "omen_idol",
+        "routeStatus": "special_generation_and_effective_corruption_need_validation",
+        "normalIdolConversion": {
+          "status": "not_evaluated",
+          "predecessor": null
+        }
+      }
+    },
+    {
+      "id": "IIwBgTA7CKtQ",
+      "baseTypeId": 27,
+      "subTypeId": 1,
+      "name": "Humble Weaver Idol",
+      "kind": "idol",
+      "flags": {
+        "hasUniqueIdentity": false,
+        "isSetFromUniqueCatalog": null,
+        "isWeaversWillUnique": null,
+        "isPrimordialUnique": null,
+        "isCocoonedUnique": null,
+        "isPreCorruptedUnique": null,
+        "hasSpecificLegendaryAffixesFromCatalog": null,
+        "idolWeaver": true,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "size": {
+        "width": 2,
+        "height": 1
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "count": 3,
+      "sourceIndexes": [
+        1,
+        2,
+        3
+      ],
+      "positions": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "affixes": [
+        {
+          "id": "ABwNgTEA",
+          "affixId": 862,
+          "name": "Vitality and Added Health Regen",
+          "tier": 1,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "weaver_idol_combination_or_reforging_goal",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 5,
+            "name": "idol_weaver"
+          },
+          "canRollOn": [
+            27
+          ]
+        },
+        {
+          "id": "ABwdgDEA",
+          "affixId": 870,
+          "name": "Physical Resistance and Minion Physical Resistance",
+          "tier": 1,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "weaver_idol_combination_or_reforging_goal",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 5,
+            "name": "idol_weaver"
+          },
+          "canRollOn": [
+            27
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 1,
+        "canDropByNegatingCannotDropFlag": false,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 0,
+        "uniqueCanDropRandomly": null,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      },
+      "acquisition": {
+        "category": "weaver_idol",
+        "routeStatus": "special_acquisition_and_reforging_documented_full_current_drop_routes_not_traced",
+        "specialDropOrRewardAllowedByEvidence": true,
+        "normalIdolConversion": {
+          "status": "not_verified",
+          "predecessor": null,
+          "reason": "未找到普通神像转化为 Weaver 神像的已验证映射；不能把职业神像的 Heretical 附魔映射套用到 Weaver 神像。"
+        },
+        "reforging": {
+          "status": "documented_and_current_faction_description_present",
+          "inputCategory": "existing_weaver_idol",
+          "description": "官方说明可在 Woven Enchanter 重铸已有 Weaver 神像，重新随机词缀且至少一条为 Weaver 词缀。现存同类 Weaver 神像是加工材料候选，不需要预先具有两条目标词缀。",
+          "fullCurrentRuntimeValidation": false
+        },
+        "filterInterpretation": "保留目标组合的直接匹配，并可额外保留同类 Weaver 神像用于重铸；cannotDrop=1 不构成隐藏该 subtype 的充分依据。",
+        "sources": [
+          "https://forum.lastepoch.com/t/the-woven-faction-monolith-updates-coming-to-last-epoch-april-17th/75147",
+          "https://forum.lastepoch.com/t/last-epoch-beneath-ancient-skies-patch-notes/78635/6",
+          ".local/research/game-data/Faction-Data-Weaver.json",
+          ".local/research/game-cs/DiffableCs/LE/IdolEnchantmentCraftType.cs"
+        ]
+      }
+    },
+    {
+      "id": "IIwBgTAbCKtQ",
+      "baseTypeId": 26,
+      "subTypeId": 1,
+      "name": "Minor Weaver Idol",
+      "kind": "idol",
+      "flags": {
+        "hasUniqueIdentity": false,
+        "isSetFromUniqueCatalog": null,
+        "isWeaversWillUnique": null,
+        "isPrimordialUnique": null,
+        "isCocoonedUnique": null,
+        "isPreCorruptedUnique": null,
+        "hasSpecificLegendaryAffixesFromCatalog": null,
+        "idolWeaver": true,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "size": {
+        "width": 1,
+        "height": 1
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "count": 4,
+      "sourceIndexes": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "positions": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "affixes": [
+        {
+          "id": "ABwFgTEA",
+          "affixId": 842,
+          "name": "Armor and Increased Armor",
+          "tier": 1,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "weaver_idol_combination_or_reforging_goal",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 5,
+            "name": "idol_weaver"
+          },
+          "canRollOn": [
+            26
+          ]
+        },
+        {
+          "id": "ABwVgjEA",
+          "affixId": 851,
+          "name": "Elemental Resistance and Minion Elemental Resistance",
+          "tier": 1,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "weaver_idol_combination_or_reforging_goal",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 5,
+            "name": "idol_weaver"
+          },
+          "canRollOn": [
+            26
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 1,
+        "canDropByNegatingCannotDropFlag": false,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 0,
+        "uniqueCanDropRandomly": null,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      },
+      "acquisition": {
+        "category": "weaver_idol",
+        "routeStatus": "special_acquisition_and_reforging_documented_full_current_drop_routes_not_traced",
+        "specialDropOrRewardAllowedByEvidence": true,
+        "normalIdolConversion": {
+          "status": "not_verified",
+          "predecessor": null,
+          "reason": "未找到普通神像转化为 Weaver 神像的已验证映射；不能把职业神像的 Heretical 附魔映射套用到 Weaver 神像。"
+        },
+        "reforging": {
+          "status": "documented_and_current_faction_description_present",
+          "inputCategory": "existing_weaver_idol",
+          "description": "官方说明可在 Woven Enchanter 重铸已有 Weaver 神像，重新随机词缀且至少一条为 Weaver 词缀。现存同类 Weaver 神像是加工材料候选，不需要预先具有两条目标词缀。",
+          "fullCurrentRuntimeValidation": false
+        },
+        "filterInterpretation": "保留目标组合的直接匹配，并可额外保留同类 Weaver 神像用于重铸；cannotDrop=1 不构成隐藏该 subtype 的充分依据。",
+        "sources": [
+          "https://forum.lastepoch.com/t/the-woven-faction-monolith-updates-coming-to-last-epoch-april-17th/75147",
+          "https://forum.lastepoch.com/t/last-epoch-beneath-ancient-skies-patch-notes/78635/6",
+          ".local/research/game-data/Faction-Data-Weaver.json",
+          ".local/research/game-cs/DiffableCs/LE/IdolEnchantmentCraftType.cs"
+        ]
+      }
+    },
+    {
+      "id": "IIwBgTAHC00A",
+      "baseTypeId": 28,
+      "subTypeId": 0,
+      "name": "Stout Lagonian Idol",
+      "kind": "idol",
+      "flags": {
+        "hasUniqueIdentity": false,
+        "isSetFromUniqueCatalog": null,
+        "isWeaversWillUnique": null,
+        "isPrimordialUnique": null,
+        "isCocoonedUnique": null,
+        "isPreCorruptedUnique": null,
+        "hasSpecificLegendaryAffixesFromCatalog": null,
+        "idolWeaver": false,
+        "isIdolEnchantmentTarget": false,
+        "sourceCorruptedFlag": null,
+        "sourceRuinedFlag": null,
+        "sourceCorruptedAffixPresent": null,
+        "catalogCorruptedSubtype": false,
+        "effectiveCorruptionState": null
+      },
+      "size": {
+        "width": 1,
+        "height": 2
+      },
+      "potential": {
+        "legendaryPotential": null,
+        "weaversWill": null,
+        "weaversTouch": null
+      },
+      "count": 3,
+      "sourceIndexes": [
+        8,
+        9,
+        10
+      ],
+      "positions": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 4
+        }
+      ],
+      "affixes": [
+        {
+          "id": "AIwBg7EA",
+          "affixId": 107,
+          "name": "Idol Increased Health",
+          "tier": 1,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "idol_combination_target",
+          "affixType": "prefix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            28
+          ]
+        },
+        {
+          "id": "AIzDsQ",
+          "affixId": 117,
+          "name": "Idol Elemental Resistance",
+          "tier": 1,
+          "roll": null,
+          "sourceRole": "regular",
+          "role": "idol_combination_target",
+          "affixType": "suffix",
+          "specialType": {
+            "id": 0,
+            "name": "standard"
+          },
+          "canRollOn": [
+            26,
+            28,
+            30,
+            32
+          ]
+        }
+      ],
+      "baseAvailability": {
+        "source": ".local/research/game-data/MasterItemsList.json",
+        "canDrop": null,
+        "cannotDrop": 0,
+        "canDropByNegatingCannotDropFlag": true,
+        "onlyDropWhenRequiringAffixEffectiveness": 0,
+        "hideSubTypeInLootFilter": 0,
+        "isLegacySubType": 0,
+        "obsoleteItem": 0,
+        "isCorruptedSubtype": 0,
+        "classRequirement": 0,
+        "levelRequirement": 0,
+        "uniqueCanDropRandomly": null,
+        "semantics": "cannotDrop 等字段保留原始底材值；其反值只是机械派生，不是对特殊生成/奖励路线的全局可掉落结论。源数据没有 canDrop 字段，故为 null。独特物品不能由普通底材标志单独判定可获得性。"
+      },
+      "acquisition": {
+        "category": "ordinary_idol",
+        "routeStatus": "explicit_target_only",
+        "normalIdolConversion": {
+          "status": "not_evaluated",
+          "predecessor": null
+        }
+      }
+    }
+  ],
+  "affixIdSets": {
+    "equipment": [
+      22,
+      26,
+      36,
+      52,
+      73,
+      406,
+      408,
+      502,
+      505,
+      679,
+      825,
+      945,
+      1093
+    ],
+    "idols": [
+      107,
+      117,
+      287,
+      842,
+      851,
+      862,
+      870,
+      941
+    ]
+  },
+  "researchReferences": [
+    {
+      "url": "https://forum.lastepoch.com/t/the-woven-faction-monolith-updates-coming-to-last-epoch-april-17th/75147",
+      "supports": "官方分别描述 Heretical 职业神像附魔、Weaver 神像和 Weaver's Will 独特装备；Weaver 神像可获得且至少有一条专属词缀。"
+    },
+    {
+      "url": "https://forum.lastepoch.com/t/last-epoch-beneath-ancient-skies-patch-notes/78635/6",
+      "supports": "官方描述 Weaver 神像重铸与至少一条 Weaver 词缀。"
+    },
+    {
+      "path": ".local/research/game-data/Faction-Data-Weaver.json",
+      "supports": "当前版本阵营数据仍有在 Woven Enchanter 重铸 Weaver 神像的奖励说明。"
+    },
+    {
+      "path": ".local/research/game-cs/DiffableCs/LE/IdolEnchantmentCraftType.cs",
+      "supports": "当前声明区分 EnchantClassSpecificIdol、RerollClassSpecificIdol、RerollWeaverIdol；不是普通神像转 Weaver 的映射证据。"
+    }
+  ]
+}

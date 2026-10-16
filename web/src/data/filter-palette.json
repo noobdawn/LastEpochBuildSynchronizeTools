@@ -1,0 +1,29 @@
+{
+  "source": {
+    "asset": "MasterColorList.lootFilterColorPresets[].primary.color",
+    "bundle": "PermaLoad.bundle",
+    "gameVersion": "1.5.2.1",
+    "buildHash": "8dfd6929fe2d10f2e77b7ed4c8e6910f49b2736b",
+    "note": "RGB values read from the installed game. Names describe the colors; IDs are filter palette indices, not rarity IDs."
+  },
+  "colors": [
+    { "id": 0, "hex": "#FFFFFF", "name": { "zh": "白色", "en": "White" } },
+    { "id": 1, "hex": "#B2B2B2", "name": { "zh": "灰色", "en": "Gray" } },
+    { "id": 2, "hex": "#BEE500", "name": { "zh": "黄绿色", "en": "Yellow green" } },
+    { "id": 3, "hex": "#FFEA00", "name": { "zh": "黄色", "en": "Yellow" } },
+    { "id": 4, "hex": "#FFAA00", "name": { "zh": "琥珀色", "en": "Amber" } },
+    { "id": 5, "hex": "#FF8000", "name": { "zh": "橙色", "en": "Orange" } },
+    { "id": 6, "hex": "#FF3D00", "name": { "zh": "朱红色", "en": "Vermilion" } },
+    { "id": 7, "hex": "#FF002F", "name": { "zh": "红色", "en": "Red" } },
+    { "id": 8, "hex": "#FF8CEF", "name": { "zh": "浅粉色", "en": "Light pink" } },
+    { "id": 9, "hex": "#F500FF", "name": { "zh": "洋红色", "en": "Magenta" } },
+    { "id": 10, "hex": "#BC47FF", "name": { "zh": "紫色", "en": "Purple" } },
+    { "id": 11, "hex": "#B18AFF", "name": { "zh": "浅紫色", "en": "Lavender" } },
+    { "id": 12, "hex": "#006EFF", "name": { "zh": "蓝色", "en": "Blue" } },
+    { "id": 13, "hex": "#4D9BFF", "name": { "zh": "浅蓝色", "en": "Light blue" } },
+    { "id": 14, "hex": "#33FDFF", "name": { "zh": "青色", "en": "Cyan" } },
+    { "id": 15, "hex": "#00E59D", "name": { "zh": "碧绿色", "en": "Mint green" } },
+    { "id": 16, "hex": "#2CFF00", "name": { "zh": "亮绿色", "en": "Bright green" } },
+    { "id": 17, "hex": "#1DA600", "name": { "zh": "深绿色", "en": "Dark green" } }
+  ]
+}

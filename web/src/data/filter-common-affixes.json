@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "groups": [
+    {
+      "id": "health",
+      "name": { "zh": "生命与恢复", "en": "Health and recovery" },
+      "affixIds": [22, 25, 29, 36, 43, 52, 90, 825]
+    },
+    {
+      "id": "endurance",
+      "name": { "zh": "耐伤", "en": "Endurance" },
+      "affixIds": [92, 425]
+    },
+    {
+      "id": "ward",
+      "name": { "zh": "能量护盾", "en": "Ward" },
+      "affixIds": [382, 824]
+    },
+    {
+      "id": "attributes",
+      "name": { "zh": "属性", "en": "Attributes" },
+      "affixIds": [50, 501, 502, 503, 504, 505]
+    },
+    {
+      "id": "resistances",
+      "name": { "zh": "抗性", "en": "Resistances" },
+      "affixIds": [7, 10, 13, 17, 19, 24, 45, 46, 80]
+    },
+    {
+      "id": "armour",
+      "name": { "zh": "护甲", "en": "Armour" },
+      "affixIds": [1, 31, 715]
+    },
+    {
+      "id": "defense",
+      "name": { "zh": "躲避、格挡与减伤", "en": "Dodge, block and mitigation" },
+      "affixIds": [3, 8, 51, 59, 81, 97, 426, 427, 717]
+    },
+    {
+      "id": "utility",
+      "name": { "zh": "魔力与机动", "en": "Mana and mobility" },
+      "affixIds": [27, 28, 34, 330, 331, 718, 1156]
+    }
+  ]
+}
