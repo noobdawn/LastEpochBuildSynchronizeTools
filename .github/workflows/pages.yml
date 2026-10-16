@@ -9,6 +9,7 @@ on:
       - 'tests/**'
       - 'package.json'
       - 'package-lock.json'
+      - '.npmrc'
       - '.github/workflows/pages.yml'
 
 permissions:
@@ -27,6 +28,8 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+      - name: Validate dependency lockfile
+        run: node --test --test-isolation=none tests/package-lock.test.js
       - run: npm ci
       - run: npm test
       - run: npm run build
